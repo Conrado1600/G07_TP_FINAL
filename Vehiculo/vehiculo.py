@@ -32,7 +32,7 @@ class Helicoptero (vehiculo):
     def calcular_tiempo_viaje(self, distancia):
         return distancia / self.velocidad  #cuenta para calcular tiempo de viaje en avion 
     
-class Avion:
+class Avion(vehiculo):
 
     def __init__(self, velocidad):
         super().__init__ ("Avion", velocidad)
