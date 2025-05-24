@@ -1,6 +1,7 @@
-from abc import ABC 
 
-class Organo(ABC):
+class Organo:
+    
+    
     def __init__(self, tipo):
         self.tipo = tipo
         self.fecha_hora_ablacion = None
