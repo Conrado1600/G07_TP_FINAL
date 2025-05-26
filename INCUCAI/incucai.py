@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta #timedelta se usa para demostrar la diferencia entre dos fechas/horas 
 import random #te da un nro aleatorio
-from Persona.persona import Donante, Receptor
+from Persona.persona import *
 from Centros_de_Salud.Centrosalud import Centro_salud
 from Organo.organo import Organo
 
@@ -19,7 +19,7 @@ class INCUCAI:
             raise Exception("El paciente ya esta registrado.")
         if isinstance(persona, Donante):
             self.donantes.append(persona)
-            self.buscar_donante_para_receptor(persona)
+            self.buscar_receptor_para_donante(persona)
         elif isinstance(persona, Receptor):
             self.receptores.append(persona)
             self.buscar_donante_para_receptor(persona)
@@ -62,7 +62,7 @@ class INCUCAI:
             nivel_trafico = 0
         else:
             distancia = random.randint(5,100)
-            nivel_trafico = random.randint(0.5, 2.5)
+            nivel_trafico = random.uniform(0.5, 2.5)#uniform es como un randint pero con float
         
         #calc tiempo de viaje y hora de llegada aprox
         tiempo_viaje = vehiculo.calcular_tiempo_viaje(distancia, nivel_trafico)

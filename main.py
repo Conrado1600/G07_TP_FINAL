@@ -38,7 +38,7 @@ def seleccionar_opcion(lista, mensaje= "Selecciones una opcion:"): #funcion enum
         except ValueError:
             print("Entrada inválida. Ingrese un número.")
 
-def seleccionar_multiples_opciones(lista, mensaje = "Seleccione una opción (0 para finalizar):"):#funcion enumerate
+def seleccionar_multiples_opciones(lista, mensaje = "Seleccione una opción (0 para finalizar):"):#funcion enumerate para opciones multiples
     seleccionados = []
     while True:
         print(mensaje)
@@ -64,7 +64,7 @@ def registrar_paciente():
     try:
         nombre = input("Nombre: ")
         dni = int(input("DNI: ")) #es un nro entero
-        fecha_nacimiento = datetime.strptime(input("Fecha de nacimiento (DD-MM-AAAA): "), "%d-%m-%A" )}
+        fecha_nacimiento = datetime.strptime(input("Fecha de nacimiento (DD-MM-AAAA): "), "%d-%m-%A")
         sexo_lista = seleccionar_opcion (sexo_opciones, "Seleccione sexo.")
         sexo = "M" if sexo_lista == "Masculino" else "F"
         telefono = input("Teléfono: ")
@@ -128,13 +128,18 @@ def buscar_receptores_por_centro():
     else:
         print("No se encontraron receptores en ese centro")
 
+def ver_prioridad_por_dni():
+    try: 
+        dni = int(input("Ingrese DNI del receptor: "))
+        for r in incucai.receptores:
+            if r.dni == dni:
+                print(f"Prioridad: {r.prioridad}, Estado: {r.estado}")
+                return
+        print ("Receptor no encontrado.")
+    except ValueError: 
+        print("DNI inválido.")
 
 
-
-
-
-            
-            
 def menu ():
     while True: 
         print("\\n ----🦾🫀Sistema de Donanción y Transplante🫀🦾----")
@@ -148,4 +153,20 @@ def menu ():
 
         if opcion == "1":
             registrar_paciente()
+        elif opcion == "2":
+            mostrar_donantes()
+        elif opcion == "3":
+            mostrar_receptores()
+        elif opcion == "4":
+            buscar_receptores_por_centro()
+        elif opcion == "5":
+            ver_prioridad_por_dni()
+        elif opcion == "6":
+            print("Saliendo del sistema.")
+            break
+        else: 
+            print("Opcion inválida.")
+
+if __name__ == "__main__":
+    menu()
         

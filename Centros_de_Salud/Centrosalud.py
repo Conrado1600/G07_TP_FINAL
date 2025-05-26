@@ -4,7 +4,17 @@ from Persona.persona import Persona, Donante, Receptor
 
 
 class Centro_salud():
+    '''
+    La clase Centro de salud se encarga de simular
+    un hospital, es decir que gestiona los cirujanos
+    disponibles en el centro para realizar el transplante.
+    Ademas asigna el vehículo apropiado para realizar el trasplante 
+    (Si el organo está en otra provincia se usa un avion, si se encuentra 
+    en la misma provincia pero diferente ciudad se usa helicoptero, y si
+    se encuentran en la misma ciudad el receptor y el donante se usa el 
+    vehículo terrestre más rápido)
 
+    '''
 
     def __init__(self, nombre, direccion, partido, provincia, telefono):
         self.nombre = nombre
@@ -42,7 +52,7 @@ class Centro_salud():
                  
         elif self.partido != partido_destino:
             for vehic in self.vehiculos:
-                if vehic.tipo == "Helicopetoro":
+                if vehic.tipo == "Helicoptero":
                     return vehic
         else: 
             Vehiculos_terrestres: list[vehiculo] = []
