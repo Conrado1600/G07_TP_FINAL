@@ -25,6 +25,101 @@ def inicializar_centros():
         centro.agregar_vehiculo(Helicoptero(250))
         centro.agregar_vehiculo(Avion(600))
         incucai.centros_salud.append(centro)
+    
+    #creo receptores y donantes para probar el main
+# Crear órganos para donantes
+    organos1 = [Organo("corazón"), Organo("riñon")]
+    organos2 = [Organo("hígado"), Organo("córneas")]
+    organos3 = [Organo("pulmones"), Organo("piel")]
+# Donantes
+    d1 = Donante(
+        nombre="Carlos Pérez",
+        dni=12345678,
+        fecha_nacimiento=datetime(10, 5, 1980),
+        sexo="M",
+        telefono="1111111111",
+        tipo_sangre="A+",
+        centro_salud=centro1,
+        fecha_fallecimiento=datetime(1, 5, 2025, 14, 30),
+        fecha_ablacion=datetime(1, 5, 2025, 16, 0),
+        organos=organos1
+    )
+
+    d2 = Donante(
+        nombre="Laura Gómez",
+        dni=23456789,
+        fecha_nacimiento=datetime(22, 8, 1975),
+        sexo="F",
+        telefono="2222222222",
+        tipo_sangre="O-",
+        centro_salud=centro2,
+        fecha_fallecimiento=datetime(28, 4, 2025, 9, 15),
+        fecha_ablacion=datetime(28, 4, 2025, 11, 0),
+        organos=organos2
+    )
+
+    d3 = Donante(
+        nombre="Miguel Rodríguez",
+        dni=34567890,
+        fecha_nacimiento=datetime(3, 3, 1990),
+        sexo="M",
+        telefono="3333333333",
+        tipo_sangre="B+",
+        centro_salud=centro3,
+        fecha_fallecimiento=datetime(10, 5, 2025, 18, 0),
+        fecha_ablacion=datetime(10, 5, 2025, 19, 30),
+        organos=organos3
+    )
+
+    # Receptores
+    r1 = Receptor(
+        nombre="Ana Torres",
+        dni=45678901,
+        fecha_nacimiento=datetime(15, 1, 2000),
+        sexo="F",
+        telefono="4444444444",
+        tipo_sangre="A+",
+        centro_salud=centro1,
+        organo_necesario="corazón",
+        fecha_ingreso=datetime(20, 5, 25),
+        prioridad=1,
+        patologia="Cardiopatía congénita"
+    )
+
+    r2 = Receptor(
+        nombre="Julián Fernández",
+        dni=56789012,
+        fecha_nacimiento=datetime(30, 9, 1985),
+        sexo="M",
+        telefono="5555555555",
+        tipo_sangre="O-",
+        centro_salud=centro2,
+        organo_necesario="hígado",
+        fecha_ingreso=datetime(10, 4, 2025),
+        prioridad=2,
+        patologia="Hepatitis crónica"
+    )
+
+    r3 = Receptor(
+        nombre="Camila Soto",
+        dni=67890123,
+        fecha_nacimiento=datetime(1995, 12, 5),
+        sexo="F",
+        telefono="6666666666",
+        tipo_sangre="B+",
+        centro_salud=centro3,
+        organo_necesario="pulmones",
+        fecha_ingreso=datetime(25, 3, 2025),
+        prioridad=3,
+        patologia="Fibrosis quística"
+    )
+
+    for d in [d1, d2, d3]:             
+        incucai.Registrar_Paciente(d)     
+
+    for r in [r1, r2, r3]:            
+        incucai.Registrar_Paciente(r)     
+
 
 
 def seleccionar_opcion(lista, mensaje= "Selecciones una opcion:"): #funcion enumerate para facilitar entrada de usuario
@@ -107,7 +202,7 @@ def registrar_paciente():
             incucai.Registrar_Paciente(receptor)
             print("El receptor fue registrado correctamente")
     except Exception as e:
-        print ("Huboun error al registrar al paciente")
+        print ("Hubo un error al registrar al paciente")
 
 def mostrar_donantes():
     print("\Lista de donantes: ")
@@ -119,18 +214,18 @@ def mostrar_donantes():
 
 def mostrar_receptores():
     print("\Lista de receptores: ")
-    for r in incucai.receptores:
-        print(f"{r.nombre} ({r.dni}) _ Organos necesarios: {r.organo_necesario} _ Prioridad: {r.prioridad} _Estado: {r.estado}")
+    for recep in incucai.receptores:
+        print(f"{recep.nombre} ({recep.dni}) _ Organos necesarios: {recep.organo_necesario} _ Prioridad: {recep.prioridad} _Estado: {recep.estado}")
 
 def buscar_receptores_por_centro():
     nombre = input("Ingrese el nombre del centro de salud en el que se encuentra: ").lower()
     encontrados = []
-    for r in incucai.receptores:
-        if nombre in r.contro_salud.nombre.lower():
-            encontrados.append(r)
+    for recep in incucai.receptores:
+        if nombre in recep.centro_salud.nombre.lower():
+            encontrados.append(recep)
     if encontrados:
-        for r in encontrados:
-            print(f"{r.nombre} _ {r.organo_necesario} _ Prioridad: {r.prioridad}")
+        for recep in encontrados:
+            print(f"{recep.nombre} _ {recep.organo_necesario} _ Prioridad: {recep.prioridad}")
     else:
         print("No se encontraron receptores en ese centro")
 
