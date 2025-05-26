@@ -1,6 +1,7 @@
-from Cirujano.cirujano import *
-from Vehiculo.vehiculo import vehiculo
-from persona import Donante, Receptor
+from Cirujano.cirujano import Cirujano
+from src.Vehiculo.vehiculo import vehiculo
+from src.Persona.donante import Donante
+from src.Persona.receptor import Receptor
 
 
 class Centro_salud():

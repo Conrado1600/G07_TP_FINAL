@@ -3,8 +3,6 @@ import random #te da un nro aleatorio
 from Centros_de_Salud.Centrosalud import *
 
 
-
-
 class INCUCAI:
 
 

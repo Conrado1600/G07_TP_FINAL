@@ -1,9 +1,12 @@
 from datetime import datetime
 from src.Organos.organo import Organo 
-from src.persona import Donante, Receptor
+from src.Persona.donante import Donante
+from src.Persona.receptor import Receptor
 from src.INCUCAI.incucai import INCUCAI
 from src.Centros_de_Salud.Centrosalud import Centro_salud
-from src.Vehiculo.vehiculo import Vehiculos_terrestre, Helicoptero, Avion
+from src.Vehiculo.terrestre import Vehiculos_terrestre
+from src.Vehiculo.helicoptero import Helicoptero
+from src.Vehiculo.avion import Avion
 
 incucai = INCUCAI()
 
