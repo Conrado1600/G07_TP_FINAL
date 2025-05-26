@@ -1,12 +1,12 @@
 from datetime import datetime
-from src.Organos.organo import Organo 
-from src.Persona.donante import Donante
-from src.Persona.receptor import Receptor
-from src.INCUCAI.incucai import INCUCAI
-from src.Centros_de_Salud.Centrosalud import Centro_salud
-from src.Vehiculo.terrestre import Vehiculos_terrestre
-from src.Vehiculo.helicoptero import Helicoptero
-from src.Vehiculo.avion import Avion
+from Organos.organo import Organo 
+from Persona.donante import Donante
+from Persona.receptor import Receptor
+from INCUCAI.incucai import INCUCAI
+from Centros_de_Salud.Centrosalud import Centro_salud
+from Vehiculo.terrestre import Vehiculos_terrestre
+from Vehiculo.helicoptero import Helicoptero
+from Vehiculo.avion import Avion
 
 incucai = INCUCAI()
 
@@ -101,7 +101,7 @@ def registrar_paciente():
             organo_necesario = seleccionar_opcion(organos_validos, "Seleccione el organo que necesita: ")
             fecha_ingreso = datetime.strptime(input("Fecha de ingreso a la lista de receptores(DD-MM-AAAA): "), "%d-%m-%A" )
             prioridad_lista= seleccionar_opcion(prioridad_opciones, "Seleccioneel nivel de prioridad: ")
-            prioridad = prioridad_opciones.index(prioridad_lista) + 1
+            prioridad = prioridad_opciones.index(prioridad_lista) + 1 #convierte la prioridad en numeros. 1 : Alta (la mas urgente, su estado es inestable), 2: Media y 3: Baja (menos urgente, su estado es estable)
             patologia = input("Patología: ")
             receptor = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro, organo_necesario, fecha_ingreso, prioridad, patologia)
             incucai.Registrar_Paciente(receptor)
@@ -137,9 +137,9 @@ def buscar_receptores_por_centro():
 def ver_prioridad_por_dni():
     try: 
         dni = int(input("Ingrese DNI del receptor: "))
-        for r in incucai.receptores:
-            if r.dni == dni:
-                print(f"Prioridad: {r.prioridad}, Estado: {r.estado}")
+        for recep in incucai.receptores:
+            if recep.dni == dni:
+                print(f"Prioridad: {recep.prioridad}, Estado: {recep.estado}")
                 return
         print ("Receptor no encontrado.")
     except ValueError: 

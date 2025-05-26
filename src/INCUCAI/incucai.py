@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta #timedelta se usa para demostrar la diferencia entre dos fechas/horas 
 import random #te da un nro aleatorio
-from Centros_de_Salud.Centrosalud import *
+from Centros_de_Salud.Centrosalud import Centro_salud,Cirujano
+from Persona.donante import Donante
+from Persona.receptor import Receptor
 
 
 class INCUCAI:
@@ -30,7 +32,7 @@ class INCUCAI:
                 if recep.tipo_sangre == donante.tipo_sangre and recep.organo_necesario.lower() == organo.tipo.lower()
             ] #buscamos si hay al menos un receptor con mismo tipo de sangre y organo a transplantar
             if posibles_receptores:
-                posibles_receptores.sort(key=lambda recep: (recep.prioridad, recep.fecha_ingreso))
+                posibles_receptores.sort(key=lambda recep: (recep.prioridad, recep.fecha_ingreso, recep.dni)) #se ordena por prioridad/estado, si dos o mas receptores tienen la misma prioridad, se analiza por fecha de ingreso a la lista de receptores, si tambien hay coincidencias en l fecha de ingreso se analiza por edad y el de menor edad sube en la lista. quien tenga todo para ser el primero en la lista queda en la posicion 0 de la lista de posibles receptores y ahi sesabe quien sera el receptor que recibe el organo.
                 receptor = posibles_receptores[0]
                 self.realizar_transplante(donante, receptor, organo)
             #ordenamos la lista de posibles receptores en funcion de lambda para que se ordene primero por la prioridad y en caso de que sea igual, se ordenaria por fecha de ingreso
