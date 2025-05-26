@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta #timedelta se usa para demostrar la diferencia entre dos fechas/horas 
 import random #te da un nro aleatorio
-from Persona.persona import *
-from Centros_de_Salud.Centrosalud import Centro_salud
-from Organo.organo import Organo
+from Centros_de_Salud.Centrosalud import *
+
 
 
 
@@ -10,6 +9,8 @@ class INCUCAI:
 
 
     def __init__(self):
+        
+        #organos_validos = Organo ()= ["corazón", "hígado", "pancreas", "hueso", "riñon", "pulmones", "intestino", "piel", "córneas"]
         self.donantes: list[Donante] = []
         self.receptores: list[Receptor] = []
         self.centros_salud: list[Centro_salud] = []

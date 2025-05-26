@@ -1,9 +1,9 @@
 from datetime import datetime
-from Organo.organo import Organo 
-from Persona.persona import Donante, Receptor
-from INCUCAI.incucai import INCUCAI
-from Centros_de_Salud.Centrosalud import Centro_salud
-from Vehiculo.vehiculo import Vehiculos_terrestre, Helicoptero, Avion
+from src.Organos.organo import Organo 
+from src.persona import Donante, Receptor
+from src.INCUCAI.incucai import INCUCAI
+from src.Centros_de_Salud.Centrosalud import Centro_salud
+from src.Vehiculo.vehiculo import Vehiculos_terrestre, Helicoptero, Avion
 
 incucai = INCUCAI()
 
@@ -66,7 +66,10 @@ def registrar_paciente():
         dni = int(input("DNI: ")) #es un nro entero
         fecha_nacimiento = datetime.strptime(input("Fecha de nacimiento (DD-MM-AAAA): "), "%d-%m-%A")
         sexo_lista = seleccionar_opcion (sexo_opciones, "Seleccione sexo.")
-        sexo = "M" if sexo_lista == "Masculino" else "F"
+        if sexo_lista == "Masculino" :
+            sexo = "M"
+        else:
+            sexo= "F"
         telefono = input("Teléfono: ")
         tipo_sangre = seleccionar_opcion(tipos_sangre, "Seleccione tipo de sangre: ")
 
@@ -142,7 +145,7 @@ def ver_prioridad_por_dni():
 
 def menu ():
     while True: 
-        print("\\n ----🦾🫀Sistema de Donanción y Transplante🫀🦾----")
+        print("\\n ---- 🫀  Sistema de Donanción y Transplante  🫀  ----")
         print("1️⃣. Registrar nuevo paciente")
         print("2️⃣. Ver lista de donantes")
         print("3️⃣. Ver lista de receptores")

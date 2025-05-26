@@ -1,18 +1,14 @@
-from Cirujano.cirujano import Cirujano
+from Cirujano.cirujano import *
 from Vehiculo.vehiculo import vehiculo
-from Persona.persona import Persona, Donante, Receptor
+from persona import Donante, Receptor
 
 
 class Centro_salud():
     '''
-    La clase Centro de salud se encarga de simular
-    un hospital, es decir que gestiona los cirujanos
-    disponibles en el centro para realizar el transplante.
-    Ademas asigna el vehículo apropiado para realizar el trasplante 
-    (Si el organo está en otra provincia se usa un avion, si se encuentra 
-    en la misma provincia pero diferente ciudad se usa helicoptero, y si
-    se encuentran en la misma ciudad el receptor y el donante se usa el 
-    vehículo terrestre más rápido)
+    La clase Centro de salud se encarga de simular un hospital, es decir que gestiona los cirujanos
+    disponibles en el centro para realizar el transplante. Ademas asigna el vehículo apropiado para realizar el trasplante 
+    (Si el organo está en otra provincia se usa un avion, si se encuentra en la misma provincia pero diferente ciudad se usa helicoptero, y si
+    se encuentran en la misma ciudad el receptor y el donante se usa el vehículo terrestre más rápido)
 
     '''
 
