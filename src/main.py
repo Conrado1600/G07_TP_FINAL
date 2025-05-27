@@ -33,94 +33,24 @@ def inicializar_centros():
     organos2 = [Organo("hígado"), Organo("córneas")]
     organos3 = [Organo("pulmones"), Organo("piel")]
 # Donantes
-    d1 = Donante(
-        nombre="Carlos Pérez",
-        dni=12345678,
-        fecha_nacimiento=datetime(10, 5, 1980),
-        sexo="M",
-        telefono="1111111111",
-        tipo_sangre="A+",
-        centro_salud=centro1,
-        fecha_fallecimiento=datetime(1, 5, 2025, 14, 30),
-        fecha_ablacion=datetime(1, 5, 2025, 16, 0),
-        organos=organos1
-    )
-
-    d2 = Donante(
-        nombre="Laura Gómez",
-        dni=23456789,
-        fecha_nacimiento=datetime(22, 8, 1975),
-        sexo="F",
-        telefono="2222222222",
-        tipo_sangre="O-",
-        centro_salud=centro2,
-        fecha_fallecimiento=datetime(28, 4, 2025, 9, 15),
-        fecha_ablacion=datetime(28, 4, 2025, 11, 0),
-        organos=organos2
-    )
-
-    d3 = Donante(
-        nombre="Miguel Rodríguez",
-        dni=34567890,
-        fecha_nacimiento=datetime(3, 3, 1990),
-        sexo="M",
-        telefono="3333333333",
-        tipo_sangre="B+",
-        centro_salud=centro3,
-        fecha_fallecimiento=datetime(10, 5, 2025, 18, 0),
-        fecha_ablacion=datetime(10, 5, 2025, 19, 30),
-        organos=organos3
-    )
-
-    # Receptores
-    r1 = Receptor(
-        nombre="Ana Torres",
-        dni=45678901,
-        fecha_nacimiento=datetime(15, 1, 2000),
-        sexo="F",
-        telefono="4444444444",
-        tipo_sangre="A+",
-        centro_salud=centro1,
-        organo_necesario="corazón",
-        fecha_ingreso=datetime(20, 5, 25),
-        prioridad=1,
-        patologia="Cardiopatía congénita"
-    )
-
-    r2 = Receptor(
-        nombre="Julián Fernández",
-        dni=56789012,
-        fecha_nacimiento=datetime(30, 9, 1985),
-        sexo="M",
-        telefono="5555555555",
-        tipo_sangre="O-",
-        centro_salud=centro2,
-        organo_necesario="hígado",
-        fecha_ingreso=datetime(10, 4, 2025),
-        prioridad=2,
-        patologia="Hepatitis crónica"
-    )
-
-    r3 = Receptor(
-        nombre="Camila Soto",
-        dni=67890123,
-        fecha_nacimiento=datetime(1995, 12, 5),
-        sexo="F",
-        telefono="6666666666",
-        tipo_sangre="B+",
-        centro_salud=centro3,
-        organo_necesario="pulmones",
-        fecha_ingreso=datetime(25, 3, 2025),
-        prioridad=3,
-        patologia="Fibrosis quística"
-    )
-
-    for d in [d1, d2, d3]:             
-        incucai.Registrar_Paciente(d)     
-
-    for r in [r1, r2, r3]:            
-        incucai.Registrar_Paciente(r)     
-
+    d1 = Donante("Carlos Pérez", 12345678, datetime(10,5,1980), "M", "1111111111", "A+", centro1,
+                 datetime(1,5,2025,14,30), datetime(1,5,2025,16,0), organos1)
+    d2 = Donante("Laura Gómez", 23456789, datetime(22,8,1975), "F", "2222222222", "O-", centro2,
+                 datetime(28,4,2025,9,15), datetime(28,4,2025,11,0), organos2)
+    d3 = Donante("Miguel Rodríguez", 34567890, datetime(3,3,1990), "M", "3333333333", "B+", centro3,
+                 datetime(10,5,2025,18,0), datetime(10,5,2025,19,30), organos3)
+#receptores
+    r1 = Receptor("Ana Torres", 45678901, datetime(15,1,2000), "F", "4444444444", "A+", centro1, "corazón",
+                  datetime(20,5,2025), 1, "Cardiopatía congénita")
+    r2 = Receptor("Julián Fernández", 56789012, datetime(30,9,1985), "M", "5555555555", "O-", centro2, "hígado",
+                  datetime(10,4,2025), 2, "Hepatitis crónica")
+    r3 = Receptor("Camila Soto", 67890123, datetime(5,12,1995), "F", "6666666666", "B+", centro3, "pulmones",
+                  datetime(25,3,2025), 3, "Fibrosis quística")
+    
+    for d in [d1, d2, d3]:
+        incucai.Registrar_Paciente(d)
+    for r in [r1, r2, r3]:
+        incucai.Registrar_Paciente(r)
 
 
 def seleccionar_opcion(lista, mensaje= "Selecciones una opcion:"): #funcion enumerate para facilitar entrada de usuario
@@ -180,9 +110,9 @@ def ingresar_fecha(mensaje = "Fecha (DD/MM/AAAA): "):
         try:
             return datetime.strptime(ingreso, "%d/%m/%Y")
         except:
-            print("Ingreso Inválido")
+            print("Ingreso inválido")
 
-def ingreso_fecha_hora(mensaje = "Fecha y hora (DD/MM/AAAA HH:MM): "):
+def ingresar_fecha_hora(mensaje = "Fecha y hora (DD/MM/AAAA HH:MM): "):
     while True:
         ingreso = input(mensaje)
         if ingreso.lower == "menu":
@@ -190,56 +120,107 @@ def ingreso_fecha_hora(mensaje = "Fecha y hora (DD/MM/AAAA HH:MM): "):
         try:
             return datetime.strptime(ingreso, "%d/%m/%Y %H:%M")
         except: 
-            print("Ingreso Inválido.")
+            print("Ingreso inválido.")
+
+def ingresar_telefono():
+    while True:
+        telefono = input("Telefono: ")
+        if telefono.lower() == "menu":
+            return None
+        if telefono.isdigit():
+            return telefono
+        print("Ingreso inválido.")
+
+def ingresar_patologia():
+    while True:
+        patologia = input("Patología: ")
+        if patologia.lower() =="menu":
+            return None
+        if patologia.replace("","").isalpha:
+            return patologia
+        print("Ingreso inválido.")
 
 def registrar_paciente():
 
     tipo_persona = seleccionar_opcion(["Donante", "Receptor"], "Seleccione el tipo de paciente: ")
-    tipo = "D" if tipo_persona == "Donante" else "R"
-    try:
-        nombre = input("Nombre: ")
-        dni = int(input("DNI: ")) #es un nro entero
-        fecha_nacimiento = datetime.strptime(input("Fecha de nacimiento (DD-MM-AAAA): "), "%d-%m-%A")
-        sexo_lista = seleccionar_opcion (sexo_opciones, "Seleccione sexo.")
-        if sexo_lista == "Masculino" :
-            sexo = "M"
-        else:
-            sexo= "F"
-        telefono = input("Teléfono: ")
-        tipo_sangre = seleccionar_opcion(tipos_sangre, "Seleccione tipo de sangre: ")
+    if tipo_persona is None: 
+        return
 
-        print("Centros disponibles:")
-        for i, c in enumerate (incucai.centros_salud):
-            print(f"{i + 1}. {c.nombre} ({c.partido}, {c.provincia})")
-        index =  int(input("Seleccione centro (número): "))-1
-        if not 0 <= index < len(incucai.centros_salud):
-            print ("El centro de salud ingresado es incorrecto")
-            return 
-        centro = incucai.centros_salud[index]
+    nombre = ingresar_nombre()
+    if nombre in None:
+        return
+    
+    dni = ingresar_dni()
+    if dni is None:
+        return
+    
+    fecha_nacimiento = ingresar_fecha("Fecha de nacimiento(DD/MM/AAAA): ")
+    if fecha_nacimiento is None:
+        return
+
+    sexo_op = seleccionar_opcion (sexo_opciones, "Seleccione sexo.")
+    if sexo_op is None:
+        return
+    sexo = 'M' if sexo_op =="Masculino" else "F"
+
+    telefono = ingresar_telefono()
+    if telefono in None:
+        return
+    
+    tipo_sangre = seleccionar_opcion(tipos_sangre, "Seleccione tipo de sangre: ")
+    if tipo_sangre is None:
+        return
+
+    print("Centros disponibles:")
+    for i, c in enumerate (incucai.centros_salud, 1):
+        print(f"{i}. {c.nombre} ({c.partido}, {c.provincia})")
+    index =  input("Seleccione centro (número) o 'menu'para salir: ")
+    if index.lower()== "menu":
+        return
+    if not index.isdigit() or not (1<= int(index)<= len(incucai.centros_salud)):
+        print ("Ingreso inválido.")
+        return 
+    centro = incucai.centros_salud[index]
 
 
-        if tipo == "D":
-            fecha_fallecimiento = datetime.strptime(input("Fecha y hora de fallecimiento (DD-MM-AAAA HH:MM): "), "%d-%m-%A %H:%M")
-            fecha_ablacion = datetime.strptime(input ("Fecha y hora de ablacio (DD-MM-AAAA HH:MM): "), "%d-%m-%A %H:%M")
-            organos_lista = seleccionar_multiples_opciones(organos_validos, "Seleccione los organos a donar (0 para finalizar): ")
-            if not organos_lista:
-                print("No son validos los organos ingresados")
-                return
-            organos = [Organo(o) for o in organos_lista]
-            donante = Donante(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro, fecha_fallecimiento, fecha_ablacion, organos)
-            incucai.registrar_paciente(donante)
-            print("El donante fue registrado correctamente")
-        else:
-            organo_necesario = seleccionar_opcion(organos_validos, "Seleccione el organo que necesita: ")
-            fecha_ingreso = datetime.strptime(input("Fecha de ingreso a la lista de receptores(DD-MM-AAAA): "), "%d-%m-%A" )
-            prioridad_lista= seleccionar_opcion(prioridad_opciones, "Seleccioneel nivel de prioridad: ")
-            prioridad = prioridad_opciones.index(prioridad_lista) + 1 #convierte la prioridad en numeros. 1 : Alta (la mas urgente, su estado es inestable), 2: Media y 3: Baja (menos urgente, su estado es estable)
-            patologia = input("Patología: ")
-            receptor = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro, organo_necesario, fecha_ingreso, prioridad, patologia)
-            incucai.Registrar_Paciente(receptor)
-            print("El receptor fue registrado correctamente")
-    except Exception as e:
-        print ("Hubo un error al registrar al paciente")
+    if tipo_persona == "Donante":
+        fecha_fallecimiento = ingresar_fecha_hora("Fecha y hora de fallecimiento (DD-MM-AAAA HH:MM): "):
+        if fecha_fallecimiento is None:
+            return
+        
+        fecha_ablacion = ingresar_fecha_hora("Fecha y hora de ablacio (DD-MM-AAAA HH:MM): ")
+        if fecha_ablacion is None:
+            return
+        
+        organos_lista = seleccionar_multiples_opciones(organos_validos, "Seleccione los organos a donar (0 para finalizar): ")
+        if organos_lista is None or len(organos_lista) == 0:
+            return
+        organos = [Organo(o) for o in organos_lista]
+
+        donante = Donante(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro, fecha_fallecimiento, fecha_ablacion, organos)
+        incucai.Registrar_Paciente(donante)
+        print("El donante fue registrado correctamente")
+    else:
+        organo_necesario = seleccionar_opcion(organos_validos, "Seleccione el organo que necesita: ")
+        if organo_necesario is None:
+            return
+        
+        fecha_ingreso = ingresar_fecha("Fecha de ingreso a la lista de receptores(DD-MM-AAAA): ")
+        if fecha_ingreso is None:
+            return
+        
+        prioridad_lista= seleccionar_opcion(prioridad_opciones, "Seleccioneel nivel de prioridad: ")
+        if prioridad_lista is None:
+            return
+        prioridad = prioridad_opciones.index(prioridad_lista) + 1 #convierte la prioridad en numeros. 1 : Alta (la mas urgente, su estado es inestable), 2: Media y 3: Baja (menos urgente, su estado es estable)
+        
+        patologia = ingresar_patologia()
+        if patologia is None:
+            return
+        
+        receptor = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro, organo_necesario, fecha_ingreso, prioridad, patologia)
+        incucai.Registrar_Paciente(receptor)
+        print("El receptor fue registrado correctamente")
 
 def mostrar_donantes():
     print("\Lista de donantes: ")
@@ -255,7 +236,7 @@ def mostrar_receptores():
         print(f"{recep.nombre} ({recep.dni}) _ Organos necesarios: {recep.organo_necesario} _ Prioridad: {recep.prioridad} _Estado: {recep.estado}")
 
 def buscar_receptores_por_centro():
-    nombre = input("Ingrese el nombre del centro de salud en el que se encuentra: ").lower()
+    nombre = input("Ingrese el nombre del centro de salud en el que se encuentra o 'menu' para volver: ").lower()
     encontrados = []
     for recep in incucai.receptores:
         if nombre in recep.centro_salud.nombre.lower():
