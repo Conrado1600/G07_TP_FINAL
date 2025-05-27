@@ -1,4 +1,5 @@
 from datetime import datetime
+import re
 from Organos.organo import Organo 
 from Persona.donante import Donante
 from Persona.receptor import Receptor
@@ -127,14 +128,13 @@ def seleccionar_opcion(lista, mensaje= "Selecciones una opcion:"): #funcion enum
         print(mensaje)
         for i, item in enumerate(lista, 1):
             print(f"{i}. {item}")
-        try:
-            opcion = int(input("Opcion: "))
-            if 1 <= opcion <= len(lista):
-                return lista[opcion - 1]
-            else:
-                print ("Opcion inválida.")
-        except ValueError:
-            print("Entrada inválida. Ingrese un número.")
+        print ("Escriba 'menu' para regresar al menu")
+        ingreso = input ("Opción: ")  
+        if ingreso.lower() == "menu":
+            return None
+        if ingreso.isdigit() and 1 <= int(ingreso) <= len(lista):
+            return lista[int(ingreso) - 1 ]
+        print("Opción inválida.")
 
 def seleccionar_multiples_opciones(lista, mensaje = "Seleccione una opción (0 para finalizar):"):#funcion enumerate para opciones multiples
     seleccionados = []
@@ -142,18 +142,55 @@ def seleccionar_multiples_opciones(lista, mensaje = "Seleccione una opción (0 p
         print(mensaje)
         for i, item in enumerate(lista, 1):
             print(f"{i}. {item}")
-        try:
-            opcion = int (input("Opción: "))
-            if opcion == 0:
-                break
-            if 1 <= opcion <= len(lista):
-                seleccionados.append(lista[opcion - 1])
-            else: 
-                print("Opción inválida.")
-        except ValueError:
-            print("Respuesta incorrecta.")
+        print("Escriba 'menu' para volver.")
+        ingreso = input("Opción: ")
+        if ingreso.lower() == "menu":
+            return None
+        if ingreso == "0":
+            break
+        if ingreso.isdigit() and 1 <=int (ingreso) <= len(lista): #isdigit para ver si solo son digitos 
+            seleccionados.append(lista[int(ingreso)- 1])
+        else: 
+            print("Opción inválida.")
     return seleccionados
 
+def ingresar_nombre():
+    while True:
+        nombre = input("Nombre: ")
+        if nombre.lower() == "menu":
+            return None
+        if nombre.replace(" ","").isalpha():#reemplaza espacios por "" y con isalpha ve si son letras
+            return nombre
+        print("Ingreso inválido.")
+
+def ingresar_dni():
+    while True:
+        dni = input("DNI: ")
+        if dni.lower() == "menu":
+            return None
+        if dni.isdigit() and len(dni) <= 8: #isdigit ve si es dígito y el dni tiene q ser menor a 8 dígitos
+            return int(dni)
+        print("DNI inválido.")
+
+def ingresar_fecha(mensaje = "Fecha (DD/MM/AAAA): "):
+    while True:
+        ingreso = input(mensaje)
+        if ingreso.lower() == "menu":
+            return None
+        try:
+            return datetime.strptime(ingreso, "%d/%m/%Y")
+        except:
+            print("Ingreso Inválido")
+
+def ingreso_fecha_hora(mensaje = "Fecha y hora (DD/MM/AAAA HH:MM): "):
+    while True:
+        ingreso = input(mensaje)
+        if ingreso.lower == "menu":
+            return None
+        try:
+            return datetime.strptime(ingreso, "%d/%m/%Y %H:%M")
+        except: 
+            print("Ingreso Inválido.")
 
 def registrar_paciente():
 
