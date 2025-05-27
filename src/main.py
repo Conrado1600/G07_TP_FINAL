@@ -28,24 +28,24 @@ def inicializar_centros():
         incucai.centros_salud.append(centro)
     
     #creo receptores y donantes para probar el main
-# Crear órganos para donantes
+#Crear órganos para donantes
     organos1 = [Organo("corazón"), Organo("riñon")]
     organos2 = [Organo("hígado"), Organo("córneas")]
     organos3 = [Organo("pulmones"), Organo("piel")]
-# Donantes
-    d1 = Donante("Carlos Pérez", 12345678, datetime(10,5,1980), "M", "1111111111", "A+", centro1,
-                 datetime(1,5,2025,14,30), datetime(1,5,2025,16,0), organos1)
-    d2 = Donante("Laura Gómez", 23456789, datetime(22,8,1975), "F", "2222222222", "O-", centro2,
-                 datetime(28,4,2025,9,15), datetime(28,4,2025,11,0), organos2)
-    d3 = Donante("Miguel Rodríguez", 34567890, datetime(3,3,1990), "M", "3333333333", "B+", centro3,
-                 datetime(10,5,2025,18,0), datetime(10,5,2025,19,30), organos3)
-#receptores
-    r1 = Receptor("Ana Torres", 45678901, datetime(15,1,2000), "F", "4444444444", "A+", centro1, "corazón",
-                  datetime(20,5,2025), 1, "Cardiopatía congénita")
-    r2 = Receptor("Julián Fernández", 56789012, datetime(30,9,1985), "M", "5555555555", "O-", centro2, "hígado",
-                  datetime(10,4,2025), 2, "Hepatitis crónica")
-    r3 = Receptor("Camila Soto", 67890123, datetime(5,12,1995), "F", "6666666666", "B+", centro3, "pulmones",
-                  datetime(25,3,2025), 3, "Fibrosis quística")
+#Donantes
+    d1 = Donante("Carlos Pérez", 12345678, datetime(1980,5,10), "M", "1111111111", "A+", centro1,
+                 datetime(2025,5,1,14,30), datetime(2025,5,1,16,0), organos1)
+    d2 = Donante("Laura Gómez", 23456789, datetime(1975,8,22), "F", "2222222222", "O-", centro2,
+                 datetime(2025,4,28,9,15), datetime(2025,4,28,11,0), organos2)
+    d3 = Donante("Miguel Rodríguez", 34567890, datetime(1990,3,3), "M", "3333333333", "B+", centro3,
+                 datetime(2025,5,10,18,0), datetime(2025,5,10,19,30), organos3)
+#Receptores
+    r1 = Receptor("Ana Torres", 45678901, datetime(2000,1,15), "F", "4444444444", "A+", centro1, "corazón",
+                  datetime(2025,5,20), 1, "Cardiopatía congénita")
+    r2 = Receptor("Julián Fernández", 56789012, datetime(1985,9,30), "M", "5555555555", "O-", centro2, "hígado",
+                  datetime(2025,4,10), 2, "Hepatitis crónica")
+    r3 = Receptor("Camila Soto", 67890123, datetime(1995,12,5), "F", "6666666666", "B+", centro3, "pulmones",
+                  datetime(2025,3,25), 3, "Fibrosis quística")
     
     for d in [d1, d2, d3]:
         incucai.Registrar_Paciente(d)
@@ -147,7 +147,7 @@ def registrar_paciente():
         return
 
     nombre = ingresar_nombre()
-    if nombre in None:
+    if nombre is None:
         return
     
     dni = ingresar_dni()
@@ -164,7 +164,7 @@ def registrar_paciente():
     sexo = 'M' if sexo_op =="Masculino" else "F"
 
     telefono = ingresar_telefono()
-    if telefono in None:
+    if telefono is None:
         return
     
     tipo_sangre = seleccionar_opcion(tipos_sangre, "Seleccione tipo de sangre: ")
@@ -184,7 +184,7 @@ def registrar_paciente():
 
 
     if tipo_persona == "Donante":
-        fecha_fallecimiento = ingresar_fecha_hora("Fecha y hora de fallecimiento (DD-MM-AAAA HH:MM): "):
+        fecha_fallecimiento = ingresar_fecha_hora("Fecha y hora de fallecimiento (DD-MM-AAAA HH:MM): ")
         if fecha_fallecimiento is None:
             return
         
@@ -236,38 +236,46 @@ def mostrar_receptores():
         print(f"{recep.nombre} ({recep.dni}) _ Organos necesarios: {recep.organo_necesario} _ Prioridad: {recep.prioridad} _Estado: {recep.estado}")
 
 def buscar_receptores_por_centro():
-    nombre = input("Ingrese el nombre del centro de salud en el que se encuentra o 'menu' para volver: ").lower()
+    nombre = input("Ingrese el nombre del centro de salud en el que se encuentra o 'menu' para volver: ").strip().lower()
+    if nombre == "menu":
+        return
     encontrados = []
     for recep in incucai.receptores:
         if nombre in recep.centro_salud.nombre.lower():
             encontrados.append(recep)
     if encontrados:
+        print("\n Receptores encontrados:")
         for recep in encontrados:
-            print(f"{recep.nombre} _ {recep.organo_necesario} _ Prioridad: {recep.prioridad}")
+            print(f"{recep.nombre} ({recep.dni}) _ {recep.organo_necesario} _ Prioridad: {recep.prioridad}")
     else:
         print("No se encontraron receptores en ese centro")
 
 def ver_prioridad_por_dni():
-    try: 
-        dni = int(input("Ingrese DNI del receptor: "))
-        for recep in incucai.receptores:
-            if recep.dni == dni:
-                print(f"Prioridad: {recep.prioridad}, Estado: {recep.estado}")
-                return
-        print ("Receptor no encontrado.")
-    except ValueError: 
-        print("DNI inválido.")
-
-
+    while True:
+        dni = input("Ingrese DNI del receptor o 'menu' para volver: ")
+        if dni.lower() == "menu":
+            return
+        if dni.isdigit() and 1 <= len(dni) <= 8:
+            dni = int(dni)
+            break
+        else: 
+            print("DNI inválido.")
+    for recep in incucai.receptores:
+        if recep.dni == dni:
+            print(f"Prioridad: {recep.prioridad} _ Estado: {recep.estado} ")
+            return
+    print("Receptor no encontrado.")
+    
 def menu ():
     while True: 
-        print("\\n ---- 🫀  Sistema de Donanción y Transplante  🫀  ----")
+        print("\\n ---- 🩺  Sistema de Donanción y Transplante  🩺  ----")
         print("1️⃣. Registrar nuevo paciente")
         print("2️⃣. Ver lista de donantes")
         print("3️⃣. Ver lista de receptores")
         print("4️⃣. Buscar receptores por centro de salud")
         print("5️⃣. Ver prioridad de un receptor por DNI")
         print("6️⃣. Salir")
+
         opcion = input("Ingrese una opción: ")
 
         if opcion == "1":
@@ -285,6 +293,9 @@ def menu ():
             break
         else: 
             print("Opcion inválida.")
+
+
+#"inicializar_centros()
 
 if __name__ == "__main__":
     menu()

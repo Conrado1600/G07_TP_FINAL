@@ -18,6 +18,6 @@ class Persona (ABC):
     @abstractmethod #se usa para indicar q es un metedo abstracto
 
     def __str__(self):
-        return f"{self.nombre}({self.dni})"
+        pass
 
 

@@ -12,3 +12,6 @@ class Receptor(Persona):
         self.prioridad = prioridad
         self.patologia = patologia
         self.estado = estado
+
+    def __str__(self):
+        return f"Receptor: {self.nombre}, DNI: {self.dni}, Sangre: {self.tipo_sangre}, Órgano: {self.organo_necesario}"

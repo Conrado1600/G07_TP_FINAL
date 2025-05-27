@@ -13,3 +13,6 @@ class Donante (Persona):
         for organo in organos:
             if organo.tipo.lower() not in self.organos_validos:
                 raise ValueError(f"Este organo no es parte de la lista de organos validos:{organo.tipo}")
+
+    def __str__(self):
+        return f"Donante: {self.nombre}, DNI: {self.dni}, Sangre: {self.tipo_sangre}"
