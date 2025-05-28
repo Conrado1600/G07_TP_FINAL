@@ -5,6 +5,6 @@ class Avion(vehiculo):
     def __init__(self, velocidad):
         super().__init__ ("Avion", velocidad)
 
-    def calcular_tiempo_viaje(self, distancia):
+    def calcular_tiempo_viaje(self, distancia, 0):
         return distancia / self.velocidad 
  

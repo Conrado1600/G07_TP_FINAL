@@ -11,7 +11,7 @@ from Vehiculo.avion import Avion
 
 incucai = INCUCAI()
 
-organos_validos = ["corazón", "hígado", "pancreas", "hueso", "riñon", "pulmones", "intestino", "piel", "córneas"]
+organos_validos = ["corazon", "higado", "pancreas", "hueso", "riñon", "pulmones", "intestino", "piel", "corneas"]
 tipos_sangre = ["A+", "A-","B+", "B-","AB+", "AB-","O+", "O-"]#preguntar sobre rh nulo
 prioridad_opciones = ["Alta", "Media", "Baja"]
 sexo_opciones = ["Masculino", "Femenino"]
@@ -29,8 +29,8 @@ def inicializar_centros():
     
     #creo receptores y donantes para probar el main
 #Crear órganos para donantes
-    organos1 = [Organo("corazón"), Organo("riñon")]
-    organos2 = [Organo("hígado"), Organo("córneas")]
+    organos1 = [Organo("corazon")]
+    organos2 = [Organo("higado"), Organo("corneas")]
     organos3 = [Organo("pulmones"), Organo("piel")]
 #Donantes
     d1 = Donante("Carlos Pérez", 12345678, datetime(1980,5,10), "M", "1111111111", "A+", centro1,
@@ -295,7 +295,8 @@ def menu ():
             print("Opcion inválida.")
 
 
-#"inicializar_centros()
+inicializar_centros()
+print("Hola")
 
 if __name__ == "__main__":
     menu()
