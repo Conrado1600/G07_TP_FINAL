@@ -8,7 +8,7 @@ class Cirujano:
         self.fecha_nacimiento = fecha_nacimiento
         self.sexo = sexo
         self.telefono = telefono
-        self.especialidad = especialidad
+        self.especialidad = especialidad.lower()
         self.operaciones_realizadas_hoy = 0
 
 
@@ -28,16 +28,17 @@ class Cirujano:
             return "general"
         if organo in especialidades.get(self. especialidad, []):
             return "especialista"
-        return"general" #como ultimo recurso si no hay especialista ni general opera un especialista que este disponible
+        return "otro" #como ultimo recurso si no hay especialista ni general opera un especialista que este disponible
 
     def realizar_operaciones(self,organo, especialidades):
         self.operaciones_realizadas_hoy += 1
         resultado = random.randint(1, 10)
-        if self.especialidad:
-           
-            organos_validos = especialidades.get(self.especialidad,[])#esta parte busca dentro a ver si coicide la especialidad con el organo, sino se encuentre se devuelve una lista vacia []
-             #si se devuelve una lista vacia la operacion falla
-            if organo.tipo.lower() in organos_validos:
+        tipo = self.tipo_especialidad(organo.tipo)
+        if tipo == "especialista":
              return resultado >= 3
-        return resultado > 5
+        else:
+            return resultado > 5
+        
+    def __str__(self):
+        return f"{self.nombre} (DNI: {self.dni}) _ Epecialidad: {self.especialidad}"
         
