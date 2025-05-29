@@ -33,7 +33,7 @@ class Centro_salud():
     def agregar_vehiculo (self, vehiculo):
         self.vehiculos.append(vehiculo)
 
-    def asignar_cirujano (self):
+    def asignar_cirujano (self, organo):
         especialistas_disponibles : list [Cirujano]= []
         generales_disponibles : list [Cirujano] =[]
         for cirujano in self.cirujanos:

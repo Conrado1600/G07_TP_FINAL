@@ -13,7 +13,7 @@ class Cirujano:
 
 
     def disponible(self):
-        return self.operaciones_realizadas_hoy == 0
+        return self.operaciones_realizadas_hoy == 0 
     
     def tipo_especialidad(self, organo):
         organo = organo.lower()
@@ -30,7 +30,7 @@ class Cirujano:
             return "especialista"
         return"general" #como ultimo recurso si no hay especialista ni general opera un especialista que este disponible
 
-    def realizar_operaciones(self,organo):
+    def realizar_operaciones(self,organo, especialidades):
         self.operaciones_realizadas_hoy += 1
         resultado = random.randint(1, 10)
         if self.especialidad:
