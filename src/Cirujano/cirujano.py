@@ -15,17 +15,27 @@ class Cirujano:
     def disponible(self):
         return self.operaciones_realizadas_hoy == 0
     
+    def tipo_especialidad(self, organo):
+        organo = organo.lower()
+        especialidades = {
+            "cardiovascular": ["corazon"],
+            "pulmonar": ["pulmones"],
+            "plastico": ["piel","corneas"],
+            "traumatologo": ["huesos"],
+            "gastroenterologo": ["intestino","riñon","higado","pancreas"]
+        }
+        if self.especialidad == "general":
+            return "general"
+        if organo in especialidades.get(self. especialidad, []):
+            return "especialista"
+        return"general" #como ultimo recurso si no hay especialista ni general opera un especialista que este disponible
 
     def realizar_operaciones(self,organo):
         self.operaciones_realizadas_hoy += 1
         resultado = random.randint(1, 10)
         if self.especialidad:
-            especialidades = ["cardiovascular","corazon"]
-            ["pulmonar","pulmones"]
-            ["plastico","piel","corneas"]
-            ["traumatologo","huesos"]
-            ["gastroenterologo","intestino","riñon","higado","pancreas"]
-            organos_validos=especialidades.get(self.especialidad,[])#esta parte busca dentro a ver si coicide la especialidad con el organo, sino se encuentre se devuelve una lista vacia []
+           
+            organos_validos = especialidades.get(self.especialidad,[])#esta parte busca dentro a ver si coicide la especialidad con el organo, sino se encuentre se devuelve una lista vacia []
              #si se devuelve una lista vacia la operacion falla
             if organo.tipo.lower() in organos_validos:
              return resultado >= 3

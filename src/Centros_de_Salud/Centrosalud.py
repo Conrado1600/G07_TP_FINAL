@@ -1,7 +1,7 @@
 from Cirujano.cirujano import Cirujano
 from Vehiculo.vehiculo import vehiculo
 from Persona.donante import Donante
-from Persona.receptor import Receptor
+from Persona.receptor import Receptor 
 
 
 class Centro_salud():
@@ -34,11 +34,19 @@ class Centro_salud():
         self.vehiculos.append(vehiculo)
 
     def asignar_cirujano (self):
-       
-       for cirujano in self.cirujanos:
+        especialistas_disponibles : list [Cirujano]= []
+        generales_disponibles : list [Cirujano] =[]
+        for cirujano in self.cirujanos:
            if cirujano.disponible():
-               return cirujano
-       raise Exception("No se encuentran cirujanos disponibles en este centro de salud")#crear una excepcion personalizada si es necesario
+                tipo = cirujano.tipo_especialidad(organo.tipo)
+                if tipo == "especialista":
+                   especialistas_disponibles.append(cirujano)
+                elif tipo == "general":
+                   generales_disponibles.append(cirujano)
+        if especialistas_disponibles: 
+           return especialistas_disponibles[0]
+        elif generales_disponibles:
+            return generales_disponibles
 
     def asignar_vehiculo (self, provincia_destino, partido_destino):
 
