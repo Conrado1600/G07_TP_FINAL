@@ -20,10 +20,8 @@ class INCUCAI:
             raise Exception("El paciente ya esta registrado.")
         if isinstance(persona, Donante):
             self.donantes.append(persona)
-            self.buscar_receptor_para_donante(persona)
         elif isinstance(persona, Receptor):
             self.receptores.append(persona)
-            self.buscar_donante_para_receptor(persona)
 
     def buscar_receptor_para_donante(self, donante):
         for organo in donante.organos:
@@ -33,16 +31,11 @@ class INCUCAI:
             ] #buscamos si hay al menos un receptor con mismo tipo de sangre y organo a transplantar
             if posibles_receptores:
                 posibles_receptores.sort(key=lambda recep: (recep.prioridad, recep.fecha_ingreso, recep.dni)) #se ordena por prioridad/estado, si dos o mas receptores tienen la misma prioridad, se analiza por fecha de ingreso a la lista de receptores, si tambien hay coincidencias en l fecha de ingreso se analiza por edad y el de menor edad sube en la lista. quien tenga todo para ser el primero en la lista queda en la posicion 0 de la lista de posibles receptores y ahi sesabe quien sera el receptor que recibe el organo.
-                receptor = posibles_receptores[0]
-                self.realizar_transplante(donante, receptor, organo)
-            #ordenamos la lista de posibles receptores en funcion de lambda para que se ordene primero por la prioridad y en caso de que sea igual, se ordenaria por fecha de ingreso
-    
-    def buscar_donante_para_receptor(self, receptor):
-        for donante in self.donantes:
-            for organo in donante.organos:
-                if organo.tipo.lower() == receptor.organo_necesario.lower() and donante.tipo_sangre == receptor.tipo_sangre:
-                    self.realizar_transplante(donante, receptor, organo)
-                    return
+                receptor = posibles_receptores[0] #ordenamos la lista de posibles receptores en funcion de lambda para que se ordene primero por la prioridad y en caso de que sea igual, se ordenaria por fecha de ingreso
+                print(f"\n Se encontró un receptor para el organo{organo.tipo} del donante {donante.nombre} para {receptor.nombre} ({receptor.dni})")
+                return(donante, receptor, organo)
+        print("No se encontro un receptor compatible")
+        return None
     
     def realizar_transplante(self, donante, receptor, organo):
         centro_donante = donante.centro_salud

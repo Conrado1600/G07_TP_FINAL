@@ -2,7 +2,7 @@ import random
 
 
 class Cirujano:
-    def __init__(self, nombre, dni, fecha_nacimiento, sexo, telefono, especialidad=None):
+    def __init__(self, nombre, dni, fecha_nacimiento, sexo, telefono, especialidad):
         self.nombre = nombre
         self.dni = dni
         self.fecha_nacimiento = fecha_nacimiento
