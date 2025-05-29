@@ -180,7 +180,7 @@ def registrar_paciente():
     if not index.isdigit() or not (1<= int(index)<= len(incucai.centros_salud)):
         print ("Ingreso inválido.")
         return 
-    centro = incucai.centros_salud[index]
+    centro = incucai.centros_salud[int (index)-1]# porque el enumerate empieza desde 1
 
 
     if tipo_persona == "Donante":
@@ -296,7 +296,6 @@ def menu ():
 
 
 inicializar_centros()
-print("Hola")
 
 if __name__ == "__main__":
     menu()

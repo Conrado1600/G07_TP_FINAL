@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta #timedelta se usa para demostrar la diferencia entre dos fechas/horas 
 import random #te da un nro aleatorio
-from Centros_de_Salud.Centrosalud import Centro_salud,Cirujano
+from Centros_de_Salud.Centrosalud import Centro_salud
+from Cirujano.cirujano import Cirujano
 from Persona.donante import Donante
 from Persona.receptor import Receptor
 
