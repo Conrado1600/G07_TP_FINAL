@@ -1,7 +1,4 @@
 from datetime import datetime
-import re
-import os
-import time
 from Organos.organo import Organo 
 from Persona.donante import Donante
 from Persona.receptor import Receptor
@@ -143,8 +140,9 @@ def ingresar_patologia():
             return patologia
         print("Ingreso inválido.")
 
+
 def registrar_paciente():
-   #limpiar_pantalla()
+
 
     tipo_persona = seleccionar_opcion(["Donante", "Receptor"], "Seleccione el tipo de paciente: ")
     if tipo_persona is None: 
@@ -228,7 +226,7 @@ def registrar_paciente():
 
 def mostrar_donantes():
    #limpiar_pantalla()
-    print("\Lista de donantes: ")
+    print("Lista de donantes: ")
     for d in incucai.donantes:
         organos_donante = []
         for o in d.organos:
@@ -237,7 +235,7 @@ def mostrar_donantes():
 
 def mostrar_receptores():
    #limpiar_pantalla()
-    print("\Lista de receptores: ")
+    print("Lista de receptores: ")
     for recep in incucai.receptores:
         print(f"{recep.nombre} ({recep.dni}) _ Organos necesarios: {recep.organo_necesario} _ Prioridad: {recep.prioridad} _Estado: {recep.estado}")
 
@@ -272,16 +270,20 @@ def ver_prioridad_paciente():
             print(f"Prioridad: {recep.prioridad} _ Estado: {recep.estado} ")
             return
     print("Receptor no encontrado.")
-    
-def limpiar_pantalla():
-    os.system("cls"if os.name == "nt" else "clear")
 
-def esperar():
-    input("\nPresione enter para continuar")
+#def limpiar_pantalla():
+    #os.system("cls"if os.name == "nt" else "clear")
 
 def volver_al_menu():
-    respuesta = input("\n¿Desea volver al menú? (s/n): ").lower()
-    return respuesta == "s"
+    while True:
+        respuesta = input("\n¿Desea volver al menú? (s/n): ").lower()
+        if respuesta == "n":
+            print("¡Gracias por usar el sistema de gestión de donación de órganos!")
+            return False
+        elif respuesta == "s":
+            return True
+        else:
+            print("Ingreso inválido. Por vafor 's' para volver al menú o 'n' para salir.")
 
 def mostrar_titulo():
     print("=" * 100)
@@ -289,7 +291,7 @@ def mostrar_titulo():
     print("=" * 100)
 
 def mostrar_centros():
-    limpiar_pantalla()
+    
     print("lista de centros de salud:")
     for c in incucai.centros_salud: 
         organos_centro = []
@@ -299,16 +301,15 @@ def mostrar_centros():
         print(f"{c.nombre} ({c.direccion}) - Órganos disponibles: {organos_centro}")
 
 def mostrar_vehiculos():
-    limpiar_pantalla()
+
     print("Lista de vehículos: ")
     for c in incucai.centros_salud:
         for v in c.vehiculos:
             print(f"{v.tipo} - Centro: {c.nombre}")
-    
+
 
 def menu ():
-    while True: 
-        limpiar_pantalla()
+    while True:
         mostrar_titulo()
         print("1️⃣. Registrar nuevo paciente")
         print("2️⃣. Ver lista de donantes")
@@ -324,24 +325,38 @@ def menu ():
 
         if opcion == "1":
             registrar_paciente()
+            if not volver_al_menu():
+                break
         elif opcion == "2":
             mostrar_donantes()
+            if not volver_al_menu():
+                break
         elif opcion == "3":
             mostrar_receptores()
+            if not volver_al_menu():
+                break
         elif opcion == "4":
             mostrar_centros()
+            if not volver_al_menu():
+                break
         elif opcion == "5":
             mostrar_vehiculos()
+            if not volver_al_menu():
+                break
         elif opcion == "6":
             buscar_receptores_por_centro()
+            if not volver_al_menu():
+                break
         elif opcion == "7":
             ver_prioridad_paciente()
+            if not volver_al_menu():
+                break
         elif opcion == "8":
             print("Saliendo del sistema.")
             break
         else: 
             print("Opcion inválida.")
-
+        
 
 inicializar_centros()
 
