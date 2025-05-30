@@ -1,5 +1,7 @@
 from datetime import datetime
 import re
+import os
+import time
 from Organos.organo import Organo 
 from Persona.donante import Donante
 from Persona.receptor import Receptor
@@ -266,6 +268,15 @@ def ver_prioridad_por_dni():
             return
     print("Receptor no encontrado.")
     
+def limpiar_pantalla():
+    os.system("cls"if os.name == "nt" else "clear")
+
+def esperar():
+    input("\nPresione enter para continuar")
+
+def volver_al_menu():
+    respuesta = input("\nDesea volver al menú?")
+
 def menu ():
     while True: 
         print("\\n ---- 🩺  Sistema de Donanción y Transplante  🩺  ----")
