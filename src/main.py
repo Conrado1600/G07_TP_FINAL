@@ -247,7 +247,7 @@ def buscar_receptores_por_centro():
         if nombre in recep.centro_salud.nombre.lower():
             encontrados.append(recep)
     if encontrados:
-        print("\n Receptores encontrados:")
+        print("Receptores encontrados:")
         for recep in encontrados:
             print(f"{recep.nombre} ({recep.dni}) _ {recep.organo_necesario} _ Prioridad: {recep.prioridad}")
     else:
@@ -284,7 +284,7 @@ def volver_al_menu():
 
 def menu ():
     while True: 
-        print("\\n ---- 🩺  Sistema de Donanción y Transplante  🩺  ----")
+        print("---- 🩺  Sistema de Donanción y Transplante  🩺  ----")
         print("1️⃣. Registrar nuevo paciente")
         print("2️⃣. Ver lista de donantes")
         print("3️⃣. Ver lista de receptores")
