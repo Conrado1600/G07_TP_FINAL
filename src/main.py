@@ -10,8 +10,9 @@ from Centros_de_Salud.Centrosalud import Centro_salud
 from Vehiculo.terrestre import Vehiculos_terrestre
 from Vehiculo.helicoptero import Helicoptero
 from Vehiculo.avion import Avion
-print("hola")
+
 incucai = INCUCAI()
+
 
 organos_validos = ["corazon", "higado", "pancreas", "hueso", "riñon", "pulmones", "intestino", "piel", "corneas"]
 tipos_sangre = ["A+", "A-","B+", "B-","AB+", "AB-","O+", "O-"]#preguntar sobre rh nulo
@@ -163,7 +164,7 @@ def registrar_paciente():
     sexo_op = seleccionar_opcion (sexo_opciones, "Seleccione sexo.")
     if sexo_op is None:
         return
-    sexo = 'M' if sexo_op =="Masculino" else "F"
+    sexo = 'M' if sexo_op.__eq__("Masculino") else "F"
 
     telefono = ingresar_telefono()
     if telefono is None:
