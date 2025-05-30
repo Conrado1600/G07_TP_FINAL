@@ -275,7 +275,10 @@ def esperar():
     input("\nPresione enter para continuar")
 
 def volver_al_menu():
-    respuesta = input("\nDesea volver al menú?")
+    respuesta = input("\n¿Desea volver al menú? (si/no): ").lower()
+    return respuesta == "si"
+
+
 
 def menu ():
     while True: 
