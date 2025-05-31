@@ -20,8 +20,11 @@ def inicializar_centros():
     centro1 = Centro_salud("Hospital Zonal Pergamino", "Liniers 979", "Pergamino", "Buenos Aires", "02477 - 429792")
     centro2 = Centro_salud("Hospital Blas L. Dubarry", "Calle 12 nro 825", "Mercedes", "Buenos Aires", "02324 - 425555")
     centro3 = Centro_salud("Hospital Garrahan", "Brasil 2150", "CABA","Buenos Aires", "0114122-6000")
+    centro4 = Centro_salud("Hospital Italiano", "Gascon 450", "CABA", "Buenos Aires", "01149590200")
+    centro5 = Centro_salud("Hospital San Martín", "Av. 1 y 70", "La Plata", "Buenos Aires", "02214255500")
+    centro6 = Centro_salud("Hospital El Cruce", "Camino Gral Belgrano 5400", "Florencio Varela", "Buenos Aires", "01142105200")
 
-    for centro in [centro1, centro2, centro3]:
+    for centro in [centro1, centro2, centro3, centro4, centro5, centro6]:
         centro.agregar_vehiculo(Vehiculos_terrestre(100))
         centro.agregar_vehiculo(Helicoptero(250))
         centro.agregar_vehiculo(Avion(600))
@@ -32,6 +35,7 @@ def inicializar_centros():
     organos1 = [Organo("corazon")]
     organos2 = [Organo("higado"), Organo("corneas")]
     organos3 = [Organo("pulmones"), Organo("piel")]
+    
 #Donantes
     d1 = Donante("Carlos Pérez", 12345678, datetime(1980,5,10), "M", "1111111111", "A+", centro1,
                  datetime(2025,5,1,14,30), datetime(2025,5,1,16,0), organos1)
@@ -186,11 +190,11 @@ def registrar_paciente():
 
 
     if tipo_persona == "Donante":
-        fecha_fallecimiento = ingresar_fecha_hora("Fecha y hora de fallecimiento (DD-MM-AAAA HH:MM): ")
+        fecha_fallecimiento = ingresar_fecha_hora("Fecha y hora de fallecimiento (DD/MM/AAAA HH:MM): ")
         if fecha_fallecimiento is None:
             return
         
-        fecha_ablacion = ingresar_fecha_hora("Fecha y hora de ablacio (DD-MM-AAAA HH:MM): ")
+        fecha_ablacion = ingresar_fecha_hora("Fecha y hora de ablación (DD/MM/AAAA HH:MM): ")
         if fecha_ablacion is None:
             return
         
