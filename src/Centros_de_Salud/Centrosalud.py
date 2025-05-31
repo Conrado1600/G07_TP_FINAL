@@ -30,7 +30,7 @@ class Centro_salud():
     def agregar_cirujano (self, Cirujano):
         """
         Agrega un cirujano a la lista de cirjuanos del centro
-        param: objeto de tipo Cirujano
+        params: objeto de tipo Cirujano
         """
         self.cirujanos.append(Cirujano)
 
@@ -67,7 +67,7 @@ class Centro_salud():
         Asigna un vehículo adecuado para el traslado del órgano basado en la ubicaión
         params: provincia_destino: Provincia donde se encuentra el receptor
                 partido_destino: Ciudad/localidad donde se encuentra el receptor
-        retrona un objeto vehícua q cumpla con las condiciones.
+        retrona un objeto vehículo q cumpla con las condiciones.
         """
 
         if self.provincia != provincia_destino:

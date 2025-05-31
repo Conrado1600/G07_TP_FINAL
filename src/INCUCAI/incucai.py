@@ -7,7 +7,11 @@ from Persona.receptor import Receptor
 
 
 class INCUCAI:
-
+    """
+    Esta clase representa el sistema de coordinacion de transplantes. Se encarga de administrar los donantes, receptores y centros de salud.
+    Ademas busca compatibilidades y se encarga de ejecutar el proceso de los transplantes.
+    
+    """
 
     def __init__(self):
         
@@ -17,6 +21,11 @@ class INCUCAI:
         self.centros_salud: list[Centro_salud] = []
 
     def Registrar_Paciente (self, persona):
+        """
+        Se encarga de registrar al paciente ya sea donante o receptor.
+        params: objeto de tipo donante o receptor
+        
+        """
         if any(paciente.dni == persona.dni for paciente in self.receptores + self.donantes): #creamos variable paciente
             raise Exception("El paciente ya esta registrado.")
         if isinstance(persona, Donante):
@@ -25,6 +34,14 @@ class INCUCAI:
             self.receptores.append(persona)
 
     def buscar_receptor_para_donante(self, donante):
+        
+        """
+        Se busca un receptor compatible para cada organo del donante.
+        params:un objeto de tipo donante con al menos un organo para donar.
+        retorna (donante, receptor, organo) en el caso de que se encuentre una compatibilidad.
+
+        """
+        
         for organo in donante.organos:
             posibles_receptores = [
                 recep for recep in self.receptores
@@ -39,6 +56,14 @@ class INCUCAI:
         return None
     
     def realizar_transplante(self, donante, receptor, organo):
+        
+        """
+        Ejecuta el proceso del transplante cuando se encuentra un donante y receptor compatibles.
+        params: el paciente donante, el paciente receptor y el organo a transplantar.
+        retorna nada pero actualiza el estado del receptor, y modifica las listas en relacion al resultado.
+
+        """
+
         centro_donante = donante.centro_salud
         centro_receptor = receptor.centro_salud
 
