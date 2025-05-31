@@ -28,12 +28,26 @@ class Centro_salud():
     
 
     def agregar_cirujano (self, Cirujano):
+        """
+        Agrega un cirujano a la lista de cirjuanos del centro
+        param: objeto de tipo Cirujano
+        """
         self.cirujanos.append(Cirujano)
 
     def agregar_vehiculo (self, vehiculo):
+        """
+        Agrega un vehículo a la lista de vehículos del centro
+        params: obejto de tipo vehículo
+        """
         self.vehiculos.append(vehiculo)
 
     def asignar_cirujano (self, organo):
+        """
+        Asigna un cirujano disponible para el tipo de órgano q se requiere.
+        Se prioriza asiganr a un especialista, si no hay devuelve los generales disponibles
+        params: objeto tipo organo
+        retorna si el cirujano especialista esta disp, sino , una lista de generales disp.
+        """
         especialistas_disponibles : list [Cirujano]= []
         generales_disponibles : list [Cirujano] =[]
         for cirujano in self.cirujanos:
@@ -49,6 +63,12 @@ class Centro_salud():
             return generales_disponibles
 
     def asignar_vehiculo (self, provincia_destino, partido_destino):
+        """
+        Asigna un vehículo adecuado para el traslado del órgano basado en la ubicaión
+        params: provincia_destino: Provincia donde se encuentra el receptor
+                partido_destino: Ciudad/localidad donde se encuentra el receptor
+        retrona un objeto vehícua q cumpla con las condiciones.
+        """
 
         if self.provincia != provincia_destino:
             for vehic in self.vehiculos:  #creamos una variable "vehic" para no repetir palabra vehiculo.

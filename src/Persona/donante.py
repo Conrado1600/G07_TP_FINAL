@@ -1,6 +1,10 @@
 from Persona.persona import Persona
 
 class Donante (Persona):
+    """
+    Esta clase respresenta a un Donante de órgano (persona fallecida), heredado de la
+    clase Persona e incluyendo información sobre el órgano a donar.
+    """
     
     organos_validos = ["corazon", "higado", "pancreas", "huesos","rinion", "pulmones", "intestino", "piel", "corneas"]
     
@@ -15,4 +19,8 @@ class Donante (Persona):
                 raise ValueError(f"Este organo no es parte de la lista de organos validos:{organo.tipo}")
 
     def __str__(self):
+        """
+        Devuelve una representación de un donante, mostrando nombre, DNI
+        tipo de sangre y los órganos a donar.
+        """
         return f"Donante: {self.nombre}, DNI: {self.dni}, Sangre: {self.tipo_sangre}"

@@ -1,6 +1,11 @@
 from Persona.persona import Persona
 
 class Receptor(Persona):
+    """
+    Esta clase representa a un receptor (hijo) de órganos, heredando los atributos 
+    de la clase padre Persona y ademas sumando información sobre necesidad médica 
+    (como es el caso de la patología o su estado).
+    """
     
     
     def __init__(self, nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, organo_necesario, fecha_ingreso, prioridad, patologia, estado="Estable"):
@@ -14,4 +19,8 @@ class Receptor(Persona):
         self.estado = estado
 
     def __str__(self):
+        """
+        devuelve la representación de un receptor, incluyendo nombre, DNI,
+        tipo de sangre y el órgano que necesita
+        """
         return f"Receptor: {self.nombre}, DNI: {self.dni}, Sangre: {self.tipo_sangre}, Órgano: {self.organo_necesario}"
