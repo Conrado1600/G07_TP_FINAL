@@ -270,10 +270,7 @@ def ver_prioridad_paciente():
             print(f"Prioridad: {recep.prioridad} _ Estado: {recep.estado} ")
             return
     print("Receptor no encontrado.")
-
-#def limpiar_pantalla():
-    #os.system("cls"if os.name == "nt" else "clear")
-
+    
 def volver_al_menu():
     while True:
         respuesta = input("\n¿Desea volver al menú? (s/n): ").lower()
