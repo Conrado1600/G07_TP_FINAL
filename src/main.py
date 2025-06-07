@@ -39,17 +39,23 @@ def inicializar_centros():
 #Donantes
     d1 = Donante("Carlos Pérez", 12345678, datetime(1980,5,10), "M", "1111111111", "A+", centro1,
                  datetime(2025,5,1,14,30), datetime(2025,5,1,16,0), organos1)
+    centro1.donantes.append(d1)
     d2 = Donante("Laura Gómez", 23456789, datetime(1975,8,22), "F", "2222222222", "O-", centro2,
                  datetime(2025,4,28,9,15), datetime(2025,4,28,11,0), organos2)
+    centro2.donantes.append(d2)
     d3 = Donante("Miguel Rodríguez", 34567890, datetime(1990,3,3), "M", "3333333333", "B+", centro3,
                  datetime(2025,5,10,18,0), datetime(2025,5,10,19,30), organos3)
+    centro3.donantes.append(d3)
 #Receptores
     r1 = Receptor("Ana Torres", 45678901, datetime(2000,1,15), "F", "4444444444", "A+", centro1, "corazón",
                   datetime(2025,5,20), 1, "Cardiopatía congénita")
+    centro1.Receptor.append(r1)
     r2 = Receptor("Julián Fernández", 56789012, datetime(1985,9,30), "M", "5555555555", "O-", centro2, "hígado",
                   datetime(2025,4,10), 2, "Hepatitis crónica")
+    centro2.Receptor.append(r2)
     r3 = Receptor("Camila Soto", 67890123, datetime(1995,12,5), "F", "6666666666", "B+", centro3, "pulmones",
                   datetime(2025,3,25), 3, "Fibrosis quística")
+    centro3.Receptor.append(r3)
     
     for d in [d1, d2, d3]:
         incucai.Registrar_Paciente(d)
@@ -205,6 +211,7 @@ def registrar_paciente():
 
         donante = Donante(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro, fecha_fallecimiento, fecha_ablacion, organos)
         incucai.Registrar_Paciente(donante)
+        centro.donantes.append(donante)
         print("El donante fue registrado correctamente")
     else:
         organo_necesario = seleccionar_opcion(organos_validos, "Seleccione el organo que necesita: ")
@@ -226,6 +233,7 @@ def registrar_paciente():
         
         receptor = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro, organo_necesario, fecha_ingreso, prioridad, patologia)
         incucai.Registrar_Paciente(receptor)
+        
         print("El receptor fue registrado correctamente")
 
 def mostrar_donantes():
@@ -293,13 +301,17 @@ def mostrar_titulo():
 
 def mostrar_centros():
     
-    print("lista de centros de salud:")
+    print("Lista de centros de salud:")
     for c in incucai.centros_salud: 
         organos_centro = []
         for d in c.donantes:
             for o in d.organos:
                 organos_centro.append(o.tipo)
-        print(f"{c.nombre} ({c.direccion}) - Órganos disponibles: {organos_centro}")
+        
+        if organos_centro:
+            print(f"{c.nombre} ({c.direccion}) - Órganos disponibles: {organos_centro}")
+        else:
+            print(f"{c.nombre} ({c.direccion}) - No hay órganos disponibles en este centro")
 
 def mostrar_vehiculos():
 
