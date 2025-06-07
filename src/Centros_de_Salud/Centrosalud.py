@@ -60,7 +60,7 @@ class Centro_salud():
         if especialistas_disponibles: 
            return especialistas_disponibles[0]
         elif generales_disponibles:
-            return generales_disponibles
+            return generales_disponibles[0]
 
     def asignar_vehiculo (self, provincia_destino, partido_destino):
         """

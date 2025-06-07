@@ -12,7 +12,7 @@ from Cirujano.cirujano import Cirujano
 incucai = INCUCAI()
 
 
-organos_validos = ["corazon", "higado", "pancreas", "hueso", "riñon", "pulmones", "intestino", "piel", "corneas"]
+organos_validos = ["corazon", "higado", "pancreas", "huesos", "rinion", "pulmones", "intestino", "piel", "corneas"]
 tipos_sangre = ["A+", "A-","B+", "B-","AB+", "AB-","O+", "O-"]#preguntar sobre rh nulo
 prioridad_opciones = ["Alta", "Media", "Baja"]
 sexo_opciones = ["Masculino", "Femenino"]
@@ -81,31 +81,55 @@ def inicializar_centros():
     organos1 = [Organo("corazon")]
     organos2 = [Organo("higado"), Organo("corneas")]
     organos3 = [Organo("pulmones"), Organo("piel")]
+    organos4 = [Organo("huesos")]
+    organos5 = [Organo("corazon"), Organo("higado")]
+    organos6 = [Organo("pancreas")]
     
 #Donantes
-    d1 = Donante("Carlos Pérez", 12345678, datetime(1980,5,10), "M", "1111111111", "A+", centro1,
+    d1 = Donante("Lisandro Romero", 12345678, datetime(1980,5,10), "M", "1111111111", "A+", centro1,
                  datetime(2025,5,1,14,30), datetime(2025,5,1,16,0), organos1)
     centro1.donantes.append(d1)
-    d2 = Donante("Laura Gómez", 23456789, datetime(1975,8,22), "F", "2222222222", "O-", centro2,
+    d2 = Donante("Manuela Desuque", 23456789, datetime(1975,8,22), "F", "2222222222", "O-", centro2,
                  datetime(2025,4,28,9,15), datetime(2025,4,28,11,0), organos2)
     centro2.donantes.append(d2)
-    d3 = Donante("Miguel Rodríguez", 34567890, datetime(1990,3,3), "M", "3333333333", "B+", centro3,
+    d3 = Donante("Matias Suarez", 34567890, datetime(1990,3,3), "M", "3333333333", "B+", centro3,
                  datetime(2025,5,10,18,0), datetime(2025,5,10,19,30), organos3)
     centro3.donantes.append(d3)
+    d4 = Donante("Zoe Pfiefer", 45612378, datetime(1982, 9, 12), "F", "777777777", "B-", centro4,
+             datetime(2025, 5, 5, 12, 0), datetime(2025, 5, 5, 13, 30), organos4)
+    centro4.donantes.append(d4)
+    d5 = Donante("Valen Perez", 56123987, datetime(1978, 11, 3), "M", "888888888", "AB+", centro5,
+             datetime(2025, 5, 7, 9, 15), datetime(2025, 5, 7, 10, 0), organos5)
+    centro5.donantes.append(d5)
+    d6 = Donante("Ludmila Esposito", 49876543, datetime(1992, 2, 18), "F", "999999999", "A-", centro6,
+             datetime(2025, 5, 10, 11, 0), datetime(2025, 5, 10, 12, 0), organos6)
+    centro6.donantes.append(d6)
+
+
 #Receptores
-    r1 = Receptor("Ana Torres", 45678901, datetime(2000,1,15), "F", "4444444444", "A+", centro1, "corazón",
+    r1 = Receptor("Miranda Klein", 45678901, datetime(2000,1,15), "F", "4444444444", "A+", centro1, "corazon",
                   datetime(2025,5,20), 1, "Cardiopatía congénita")
     centro1.Receptor.append(r1)
-    r2 = Receptor("Julián Fernández", 56789012, datetime(1985,9,30), "M", "5555555555", "O-", centro2, "hígado",
+    r2 = Receptor("Conrado Abud", 56789012, datetime(1985,9,30), "M", "5555555555", "O-", centro2, "higado",
                   datetime(2025,4,10), 2, "Hepatitis crónica")
     centro2.Receptor.append(r2)
-    r3 = Receptor("Camila Soto", 67890123, datetime(1995,12,5), "F", "6666666666", "B+", centro3, "pulmones",
+    r3 = Receptor("Teresa Moraiz", 67890123, datetime(1995,12,5), "F", "6666666666", "B+", centro3, "pulmones",
                   datetime(2025,3,25), 3, "Fibrosis quística")
     centro3.Receptor.append(r3)
+    r4 = Receptor("Guido Mocagatta", 41234567, datetime(1990, 8, 9), "M", "101010101", "B-", centro4, "rinion", 
+              datetime(2025, 5, 21), 2, "Insuficiencia renal crónica")
+    centro4.Receptor.append(r4)
+    r5 = Receptor("Juana Larrumbide", 48765432, datetime(1986, 4, 27), "F", "121212121", "AB+", centro5, "higado", 
+              datetime(2025, 5, 22), 1, "Hepatitis autoinmune")
+    centro5.Receptor.append(r5)
+    r6 = Receptor("Katerina Josipovich", 47891236, datetime(1999, 1, 5), "F", "131313131", "A-", centro6, "pancreas", 
+              datetime(2025, 5, 23), 3, "Diabetes tipo 1")
+    centro6.Receptor.append(r6)
+
     
-    for d in [d1, d2, d3]:
+    for d in [d1, d2, d3, d4, d5, d6]:
         incucai.Registrar_Paciente(d)
-    for r in [r1, r2, r3]:
+    for r in [r1, r2, r3, r4, r5, r6]:
         incucai.Registrar_Paciente(r)
 
 
@@ -171,7 +195,7 @@ def ingresar_fecha(mensaje = "Fecha (DD/MM/AAAA): "):
 def ingresar_fecha_hora(mensaje = "Fecha y hora (DD/MM/AAAA HH:MM): "):
     while True:
         ingreso = input(mensaje)
-        if ingreso.lower == "menu":
+        if ingreso.lower() == "menu":
             return None
         try:
             return datetime.strptime(ingreso, "%d/%m/%Y %H:%M")
@@ -192,7 +216,7 @@ def ingresar_patologia():
         patologia = input("Patología: ")
         if patologia.lower() =="menu":
             return None
-        if patologia.replace("","").isalpha:
+        if patologia.replace(" ","").isalpha():
             return patologia
         print("Ingreso inválido.")
 
@@ -278,9 +302,11 @@ def registrar_paciente():
             return
         
         receptor = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro, organo_necesario, fecha_ingreso, prioridad, patologia)
-        incucai.Registrar_Paciente(receptor)
-        
-        print("El receptor fue registrado correctamente")
+        try:
+            incucai.Registrar_Paciente(receptor)
+            print("El receptor fue registrado correctamente")
+        except Exception as e: 
+            print(f"Error al registrar al receptor.")
 
 def mostrar_donantes():
    #limpiar_pantalla()
@@ -376,7 +402,24 @@ def mostrar_cirujanos_por_centro():
         else:
             print("Ningun cirujano asignado")
 
+def inicializar_proceso_transplante():
+    for donante_obj in incucai.donantes:
+        resultado_busqueda = incucai.buscar_receptor_para_donante(donante_obj)
 
+        if resultado_busqueda:
+            donante, receptor, organo = resultado_busqueda
+            print(f"Compatibilidad encontrada: - Donante: {donante.nombre}, Receptor: {receptor.nombre}, Órgano a donar/recibir: {organo.tipo}.")
+            incucai.realizar_transplante(donante, receptor, organo)
+
+            if receptor not in incucai.receptores:
+                print(f"Trasnplante de {organo.tipo} realizado con éxito para {receptor.nombre}. El paciente fue removido de la lista de receptores.")
+            elif receptor.estado == "Inestable" and receptor.prioridad == 1:
+                print(f"Transplante de {organo.tipo} para {receptor.nombre} no fue exitoso. El paciente se encuentra en estado inestable con alta prioridad")
+            else: 
+                print(f"Transplante de {organo.tipo} para {receptor.nombre} se llevó a cabo. Estado actual del paciente: {receptor.estado}")
+            
+            return
+    print("No se pudo encontrar un donante y receptor compatibles para el transplante en este momento.")
 
 def menu ():
     while True:
@@ -389,7 +432,8 @@ def menu ():
         print("6️⃣. Buscar receptores por centro de salud")
         print("7️⃣. Ver prioridad del receptor" )
         print("8️⃣. Ver lista de cirujanos por Centro")
-        print("9️⃣. Salir")
+        print("9️⃣. Proceso de transplante")
+        print("🔟. Salir")
         print("-" * 100)
 
         opcion = input("Ingrese una opción: ")
@@ -427,6 +471,10 @@ def menu ():
             if not volver_al_menu():
                 break
         elif opcion == "9":
+            inicializar_proceso_transplante()
+            if not volver_al_menu():
+                break
+        elif opcion == "10":
             print("Saliendo del sistema.")
             break
         else: 

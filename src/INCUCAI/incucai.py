@@ -15,7 +15,6 @@ class INCUCAI:
 
     def __init__(self):
         
-        #organos_validos = Organo ()= ["corazón", "hígado", "pancreas", "hueso", "riñon", "pulmones", "intestino", "piel", "córneas"]
         self.donantes: list[Donante] = []
         self.receptores: list[Receptor] = []
         self.centros_salud: list[Centro_salud] = []
@@ -50,9 +49,7 @@ class INCUCAI:
             if posibles_receptores:
                 posibles_receptores.sort(key=lambda recep: (recep.prioridad, recep.fecha_ingreso, recep.dni)) #se ordena por prioridad/estado, si dos o mas receptores tienen la misma prioridad, se analiza por fecha de ingreso a la lista de receptores, si tambien hay coincidencias en l fecha de ingreso se analiza por edad y el de menor edad sube en la lista. quien tenga todo para ser el primero en la lista queda en la posicion 0 de la lista de posibles receptores y ahi sesabe quien sera el receptor que recibe el organo.
                 receptor = posibles_receptores[0] #ordenamos la lista de posibles receptores en funcion de lambda para que se ordene primero por la prioridad y en caso de que sea igual, se ordenaria por fecha de ingreso
-                print(f"\n Se encontró un receptor para el organo{organo.tipo} del donante {donante.nombre} para {receptor.nombre} ({receptor.dni})")
                 return(donante, receptor, organo)
-        print("No se encontro un receptor compatible")
         return None
     
     def realizar_transplante(self, donante, receptor, organo):
@@ -71,7 +68,7 @@ class INCUCAI:
         organo.set_fecha_ablacion(fecha_ablacion)
         donante.organos.remove(organo)
 
-        vehiculo = centro_donante.asignar_vehiculo(provincia_destino=centro_receptor, partido_destino=centro_receptor)
+        vehiculo = centro_donante.asignar_vehiculo(provincia_destino=centro_receptor.provincia, partido_destino=centro_receptor.partido)
         #invento distancias segun el tipo de vehiculo asi tengo en cuenta todos los casos pero con valores inventados de distancia y nivel de trafico
 
         if vehiculo.tipo == "Avion":
@@ -88,13 +85,13 @@ class INCUCAI:
         tiempo_viaje = vehiculo.calcular_tiempo_viaje(distancia, nivel_trafico)
         llegada = fecha_ablacion + timedelta(hours=tiempo_viaje)
 
-        cirujano = centro_receptor.asignar_cirujano(organo) #asigno cirujano
+        cirujano_apto = centro_receptor.asignar_cirujano(organo) #asigno cirujano
 
         if llegada - fecha_ablacion > timedelta(hours=20):
             receptor.estado = "Inestable"
             receptor.prioridad = 1
         else:
-            exito = cirujano.realizar_operacion(organo)
+            exito = cirujano_apto.realizar_operaciones(organo)
             if exito:
                 self.receptores.remove(receptor)
             else:

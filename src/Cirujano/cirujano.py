@@ -46,7 +46,7 @@ class Cirujano:
             return "especialista"
         return "otro" #como ultimo recurso si no hay especialista ni general opera un especialista que este disponible
 
-    def realizar_operaciones(self,organo, especialidades):
+    def realizar_operaciones(self,organo):
         """
         Simula la operación y actualiza el contador de operacion del cirujano.
         """
