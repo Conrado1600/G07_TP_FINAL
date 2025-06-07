@@ -7,6 +7,7 @@ from Centros_de_Salud.Centrosalud import Centro_salud
 from Vehiculo.terrestre import Vehiculos_terrestre
 from Vehiculo.helicoptero import Helicoptero
 from Vehiculo.avion import Avion
+from Cirujano.cirujano import Cirujano 
 
 incucai = INCUCAI()
 
@@ -24,13 +25,58 @@ def inicializar_centros():
     centro5 = Centro_salud("Hospital San Martín", "Av. 1 y 70", "La Plata", "Buenos Aires", "02214255500")
     centro6 = Centro_salud("Hospital El Cruce", "Camino Gral Belgrano 5400", "Florencio Varela", "Buenos Aires", "01142105200")
 
+    # Cirujanos para el centro 1
+    cirujano_p1 = Cirujano("Dr. Martín Sosa", 30111222, datetime(1978, 3, 15), "Masculino", "1123456789", "cardiovascular")
+    cirujano_p2 = Cirujano("Dra. Victoria Rivas", 32333444, datetime(1985, 7, 20), "Femenino", "1134567890", "general")
+    cirujano_p3 = Cirujano("Dr. Lucas Díaz", 28999888, datetime(1970, 11, 5), "Masculino", "1145678901", "gastroenterologo")
+
+    # Cirujanos para el centro 2
+    cirujano_m1 = Cirujano("Dra. Elena García", 35555666, datetime(1982, 4, 10), "Femenino", "1156789012", "neurocirugia")
+    cirujano_m2 = Cirujano("Dr. Andrés Ferrari", 31777888, datetime(1979, 9, 25), "Masculino", "1167890123", "general")
+
+    # Cirujanos para el centro 3
+    cirujano_g1 = Cirujano("Dr. Juan Pérez", 25123456, datetime(1965, 1, 1), "Masculino", "1178901234", "pediatra") # Nota: no hay especialidad "pediatra" en tipo_especialidad
+    cirujano_g2 = Cirujano("Dra. Sofía Medina", 38987654, datetime(1992, 6, 30), "Femenino", "1189012345", "general")
+    cirujano_g3 = Cirujano("Dr. Pablo Castro", 29000111, datetime(1973, 2, 8), "Masculino", "1190123456", "traumatologo")
+
+    # Cirujanos para el centro 4 
+    cirujano_i1 = Cirujano("Dr. Fernando Núñez", 27000333, datetime(1968, 10, 12), "Masculino", "1110203040", "gastroenterologo")
+    cirujano_i2 = Cirujano("Dra. Carolina Paz", 34567890, datetime(1987, 5, 5), "Femenino", "1120304050", "general")
+
+    # Cirujanos para el centro 5 
+    cirujano_s1 = Cirujano("Dr. Javier Torres", 26112233, datetime(1971, 7, 1), "Masculino", "1130405060", "pulmonar")
+    cirujano_s2 = Cirujano("Dra. Romina Vidal", 36778899, datetime(1989, 2, 28), "Femenino", "1140506070", "general")
+
+    # Cirujanos para el centro 6 
+    cirujano_e1 = Cirujano("Dr. Gustavo Peralta", 24998877, datetime(1960, 12, 1), "Masculino", "1150607080", "cardiovascular")
+    cirujano_e2 = Cirujano("Dra. Florencia Luna", 33445566, datetime(1981, 8, 18), "Femenino", "1160708090", "general")
+
     for centro in [centro1, centro2, centro3, centro4, centro5, centro6]:
         centro.agregar_vehiculo(Vehiculos_terrestre(100))
         centro.agregar_vehiculo(Helicoptero(250))
         centro.agregar_vehiculo(Avion(600))
         incucai.centros_salud.append(centro)
     
-    #creo receptores y donantes para probar el main
+    centro1.agregar_cirujano(cirujano_p1)
+    centro1.agregar_cirujano(cirujano_p2)
+    centro1.agregar_cirujano(cirujano_p3)
+
+    centro2.agregar_cirujano(cirujano_m1)
+    centro2.agregar_cirujano(cirujano_m2)
+
+    centro3.agregar_cirujano(cirujano_g1)
+    centro3.agregar_cirujano(cirujano_g2)
+    centro3.agregar_cirujano(cirujano_g3)
+
+    centro4.agregar_cirujano(cirujano_i1)
+    centro4.agregar_cirujano(cirujano_i2)
+
+    centro5.agregar_cirujano(cirujano_s1)
+    centro5.agregar_cirujano(cirujano_s2)
+
+    centro6.agregar_cirujano(cirujano_e1)
+    centro6.agregar_cirujano(cirujano_e2)
+
 #Crear órganos para donantes
     organos1 = [Organo("corazon")]
     organos2 = [Organo("higado"), Organo("corneas")]
@@ -320,6 +366,17 @@ def mostrar_vehiculos():
         for v in c.vehiculos:
             print(f"{v.tipo} - Centro: {c.nombre}")
 
+def mostrar_cirujanos_por_centro():
+    print ("Lista de cirujanos en centros: ")
+    for centro in incucai.centros_salud:
+        print (f"\nCirujanos en {centro.nombre}:")
+        if centro.cirujanos:
+            for cirujano in centro.cirujanos:
+                print(f"- {cirujano.nombre} (DNI: {cirujano.dni} - Especialidad: {cirujano.especialidad})")
+        else:
+            print("Ningun cirujano asignado")
+
+
 
 def menu ():
     while True:
@@ -330,8 +387,9 @@ def menu ():
         print("4️⃣ .Ver lista de centros de salud")
         print("5️⃣. Ver lista de vehículos")
         print("6️⃣. Buscar receptores por centro de salud")
-        print("7️⃣. Ver prioridad del receptor:" )
-        print("8️⃣. Salir")
+        print("7️⃣. Ver prioridad del receptor" )
+        print("8️⃣. Ver lista de cirujanos por Centro")
+        print("9️⃣. Salir")
         print("-" * 100)
 
         opcion = input("Ingrese una opción: ")
@@ -365,6 +423,10 @@ def menu ():
             if not volver_al_menu():
                 break
         elif opcion == "8":
+            mostrar_cirujanos_por_centro()
+            if not volver_al_menu():
+                break
+        elif opcion == "9":
             print("Saliendo del sistema.")
             break
         else: 
