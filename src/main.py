@@ -13,7 +13,7 @@ incucai = INCUCAI()
 
 
 organos_validos = ["corazon", "higado", "pancreas", "huesos", "rinion", "pulmones", "intestino", "piel", "corneas"]
-tipos_sangre = ["A+", "A-","B+", "B-","AB+", "AB-","O+", "O-"]#preguntar sobre rh nulo
+tipos_sangre = ["A+", "A-","B+", "B-","AB+", "AB-","O+", "O-"]
 prioridad_opciones = ["Alta", "Media", "Baja"]
 sexo_opciones = ["Masculino", "Femenino"]
 
@@ -25,31 +25,31 @@ def inicializar_centros():
     centro5 = Centro_salud("Hospital San Martín", "Av. 1 y 70", "La Plata", "Buenos Aires", "02214255500")
     centro6 = Centro_salud("Hospital El Cruce", "Camino Gral Belgrano 5400", "Florencio Varela", "Buenos Aires", "01142105200")
 
-    # Cirujanos para el centro 1
-    cirujano_p1 = Cirujano("Dr. Martín Sosa", 30111222, datetime(1978, 3, 15), "Masculino", "1123456789", "cardiovascular")
-    cirujano_p2 = Cirujano("Dra. Victoria Rivas", 32333444, datetime(1985, 7, 20), "Femenino", "1134567890", "general")
-    cirujano_p3 = Cirujano("Dr. Lucas Díaz", 28999888, datetime(1970, 11, 5), "Masculino", "1145678901", "gastroenterologo")
+    # Cirujanos para el centro 1(Pergamino)
+    cirujano_p1 = Cirujano("Dr. Facundo Capdevila", 30111222, datetime(1978, 3, 15), "Masculino", "1123456789", "cardiovascular")
+    cirujano_p2 = Cirujano("Dra. Luisa De Pascua Ruckauf", 32333444, datetime(1985, 7, 20), "Femenino", "1134567890", "general")
+    cirujano_p3 = Cirujano("Dr. Agustin Marino Aguirre", 28999888, datetime(1970, 11, 5), "Masculino", "1145678901", "gastroenterologo")
 
-    # Cirujanos para el centro 2
-    cirujano_m1 = Cirujano("Dra. Elena García", 35555666, datetime(1982, 4, 10), "Femenino", "1156789012", "neurocirugia")
-    cirujano_m2 = Cirujano("Dr. Andrés Ferrari", 31777888, datetime(1979, 9, 25), "Masculino", "1167890123", "general")
+    # Cirujanos para el centro 2(Mercedes)
+    cirujano_m1 = Cirujano("Dra. Olivia Puricelli", 35555666, datetime(1982, 4, 10), "Femenino", "1156789012", "traumatologo")
+    cirujano_m2 = Cirujano("Dr. Simón Montero", 31777888, datetime(1979, 9, 25), "Masculino", "1167890123", "general")
 
-    # Cirujanos para el centro 3
-    cirujano_g1 = Cirujano("Dr. Juan Pérez", 25123456, datetime(1965, 1, 1), "Masculino", "1178901234", "pediatra") # Nota: no hay especialidad "pediatra" en tipo_especialidad
-    cirujano_g2 = Cirujano("Dra. Sofía Medina", 38987654, datetime(1992, 6, 30), "Femenino", "1189012345", "general")
-    cirujano_g3 = Cirujano("Dr. Pablo Castro", 29000111, datetime(1973, 2, 8), "Masculino", "1190123456", "traumatologo")
+    # Cirujanos para el centro 3 (Garrahan)
+    cirujano_g1 = Cirujano("Dr. Santino Carbone", 25123456, datetime(1965, 1, 1), "Masculino", "1178901234", "plastico") 
+    cirujano_g2 = Cirujano("Dra. Martina Collazo", 38987654, datetime(1992, 6, 30), "Femenino", "1189012345", "general")
+    cirujano_g3 = Cirujano("Dr. Nehuen Español ", 29000111, datetime(1973, 2, 8), "Masculino", "1190123456", "traumatologo")
 
-    # Cirujanos para el centro 4 
-    cirujano_i1 = Cirujano("Dr. Fernando Núñez", 27000333, datetime(1968, 10, 12), "Masculino", "1110203040", "gastroenterologo")
-    cirujano_i2 = Cirujano("Dra. Carolina Paz", 34567890, datetime(1987, 5, 5), "Femenino", "1120304050", "general")
+    # Cirujanos para el centro 4 (Italiano)
+    cirujano_i1 = Cirujano("Dra. Francisca Marciano", 27000333, datetime(1968, 10, 12), "Femenino", "1110203040", "gastroenterologo")
+    cirujano_i2 = Cirujano("Dra. Milena Lettieri", 34567890, datetime(1987, 5, 5), "Femenino", "1120304050", "general")
 
-    # Cirujanos para el centro 5 
-    cirujano_s1 = Cirujano("Dr. Javier Torres", 26112233, datetime(1971, 7, 1), "Masculino", "1130405060", "pulmonar")
-    cirujano_s2 = Cirujano("Dra. Romina Vidal", 36778899, datetime(1989, 2, 28), "Femenino", "1140506070", "general")
+    # Cirujanos para el centro 5 (San Martin)
+    cirujano_s1 = Cirujano("Dr. Rodolfo Abud", 26112233, datetime(1971, 7, 1), "Masculino", "1130405060", "pulmonar")
+    cirujano_s2 = Cirujano("Dra. Dorina Trovato", 36778899, datetime(1989, 2, 28), "Femenino", "1140506070", "general")
 
-    # Cirujanos para el centro 6 
-    cirujano_e1 = Cirujano("Dr. Gustavo Peralta", 24998877, datetime(1960, 12, 1), "Masculino", "1150607080", "cardiovascular")
-    cirujano_e2 = Cirujano("Dra. Florencia Luna", 33445566, datetime(1981, 8, 18), "Femenino", "1160708090", "general")
+    # Cirujanos para el centro 6 (El Cruce)
+    cirujano_e1 = Cirujano("Dr. Guillermo Klein", 24998877, datetime(1960, 12, 1), "Masculino", "1150607080", "cardiovascular")
+    cirujano_e2 = Cirujano("Dra. Victoria Faro", 33445566, datetime(1981, 8, 18), "Femenino", "1160708090", "general")
 
     for centro in [centro1, centro2, centro3, centro4, centro5, centro6]:
         centro.agregar_vehiculo(Vehiculos_terrestre(100))
@@ -77,7 +77,7 @@ def inicializar_centros():
     centro6.agregar_cirujano(cirujano_e1)
     centro6.agregar_cirujano(cirujano_e2)
 
-#Crear órganos para donantes
+#órganos para donantes
     organos1 = [Organo("corazon")]
     organos2 = [Organo("higado"), Organo("corneas")]
     organos3 = [Organo("pulmones"), Organo("piel")]
@@ -243,7 +243,7 @@ def registrar_paciente():
     sexo_op = seleccionar_opcion (sexo_opciones, "Seleccione sexo.")
     if sexo_op is None:
         return
-    sexo = 'M' if sexo_op.__eq__("Masculino") else "F"
+    sexo = 'M' if sexo_op.__eq__("Masculino") else "F" #metodo magico
 
     telefono = ingresar_telefono()
     if telefono is None:
@@ -277,7 +277,7 @@ def registrar_paciente():
         organos_lista = seleccionar_multiples_opciones(organos_validos, "Seleccione los organos a donar (0 para finalizar): ")
         if organos_lista is None or len(organos_lista) == 0:
             return
-        organos = [Organo(o) for o in organos_lista]
+        organos = [Organo(o) for o in organos_lista] #convierte cada string de la lista en un objeto de la clase Organo
 
         donante = Donante(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro, fecha_fallecimiento, fecha_ablacion, organos)
         incucai.Registrar_Paciente(donante)
@@ -309,7 +309,7 @@ def registrar_paciente():
             print(f"Error al registrar al receptor.")
 
 def mostrar_donantes():
-   #limpiar_pantalla()
+   
     print("Lista de donantes: ")
     for d in incucai.donantes:
         organos_donante = []
@@ -318,13 +318,13 @@ def mostrar_donantes():
         print(f"{d.nombre} ({d.dni}) _ Organos a donar: {organos_donante}")
 
 def mostrar_receptores():
-   #limpiar_pantalla()
+   
     print("Lista de receptores: ")
     for recep in incucai.receptores:
         print(f"{recep.nombre} ({recep.dni}) _ Organos necesarios: {recep.organo_necesario} _ Prioridad: {recep.prioridad} _Estado: {recep.estado}")
 
 def buscar_receptores_por_centro():
-   #limpiar_pantalla()
+
     nombre = input("Ingrese el nombre del centro de salud en el que se encuentra o 'menu' para volver: ").strip().lower()
     if nombre == "menu":
         return

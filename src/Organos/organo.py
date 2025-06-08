@@ -13,7 +13,7 @@ class Organo:
     def set_fecha_ablacion(self, fecha_hora):
         """
         Establece la fecha y hora de ablacion del organo a transplantar.
-        params: in objeto datetime que dice cuando se realizo la ablacion del organo.
+        params: un objeto datetime que dice cuando se realizo la ablacion del organo.
 
         """
         self.fecha_hora_ablacion = fecha_hora
