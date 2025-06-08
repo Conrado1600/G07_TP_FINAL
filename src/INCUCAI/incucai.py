@@ -40,6 +40,7 @@ class INCUCAI:
         retorna (donante, receptor, organo) en el caso de que se encuentre una compatibilidad.
 
         """
+        compatibilidades = []
         
         for organo in donante.organos:
             posibles_receptores = [
@@ -48,9 +49,9 @@ class INCUCAI:
             ] #buscamos si hay al menos un receptor con mismo tipo de sangre y organo a transplantar
             if posibles_receptores:
                 posibles_receptores.sort(key=lambda recep: (recep.prioridad, recep.fecha_ingreso, recep.dni)) #se ordena por prioridad/estado, si dos o mas receptores tienen la misma prioridad, se analiza por fecha de ingreso a la lista de receptores, si tambien hay coincidencias en l fecha de ingreso se analiza por edad y el de menor edad sube en la lista. quien tenga todo para ser el primero en la lista queda en la posicion 0 de la lista de posibles receptores y ahi sesabe quien sera el receptor que recibe el organo.
-                receptor = posibles_receptores[0] #ordenamos la lista de posibles receptores en funcion de lambda para que se ordene primero por la prioridad y en caso de que sea igual, se ordenaria por fecha de ingreso
-                return(donante, receptor, organo)
-        return None
+                receptor  = posibles_receptores[0]
+                compatibilidades.append((donante, receptor, organo))
+        return compatibilidades
     
     def realizar_transplante(self, donante, receptor, organo):
         

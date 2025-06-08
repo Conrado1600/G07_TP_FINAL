@@ -159,7 +159,12 @@ def seleccionar_multiples_opciones(lista, mensaje = "Seleccione una opción (0 p
         if ingreso == "0":
             break
         if ingreso.isdigit() and 1 <=int (ingreso) <= len(lista): #isdigit para ver si solo son digitos 
-            seleccionados.append(lista[int(ingreso)- 1])
+            opcion = lista[int(ingreso)- 1]
+            if opcion in seleccionados:
+                print(f"'{opcion}' ya fue seleccionado una vez. Ingrese nuevamente")
+                continue
+            else:
+                seleccionados.append(opcion)
         else: 
             print("Opción inválida.")
     return seleccionados
@@ -404,21 +409,24 @@ def mostrar_cirujanos_por_centro():
 
 def inicializar_proceso_transplante():
     for donante_obj in incucai.donantes:
-        resultado_busqueda = incucai.buscar_receptor_para_donante(donante_obj)
+        if not donante_obj.organos: #esto hce que saltee a los donantes que ya no tienen organospara donar
+            continue
+        
+        compatibilidades = incucai.buscar_receptor_para_donante(donante_obj)
 
-        if resultado_busqueda:
-            donante, receptor, organo = resultado_busqueda
-            print(f"Compatibilidad encontrada: - Donante: {donante.nombre}, Receptor: {receptor.nombre}, Órgano a donar/recibir: {organo.tipo}.")
-            incucai.realizar_transplante(donante, receptor, organo)
+        if compatibilidades:
+            for donante, receptor, organo in compatibilidades:
+                print(f"Compatibilidad encontrada: - Donante: {donante.nombre}, Receptor: {receptor.nombre}, Órgano a donar/recibir: {organo.tipo}.")
+                incucai.realizar_transplante(donante, receptor, organo)
 
-            if receptor not in incucai.receptores:
-                print(f"Trasnplante de {organo.tipo} realizado con éxito para {receptor.nombre}. El paciente fue removido de la lista de receptores.")
-            elif receptor.estado == "Inestable" and receptor.prioridad == 1:
-                print(f"Transplante de {organo.tipo} para {receptor.nombre} no fue exitoso. El paciente se encuentra en estado inestable con alta prioridad")
-            else: 
-                print(f"Transplante de {organo.tipo} para {receptor.nombre} se llevó a cabo. Estado actual del paciente: {receptor.estado}")
+                if receptor not in incucai.receptores:
+                    print(f"Trasnplante de {organo.tipo} realizado con éxito para {receptor.nombre}. El paciente fue removido de la lista de receptores.")
+                elif receptor.estado == "Inestable" and receptor.prioridad == 1:
+                    print(f"Transplante de {organo.tipo} para {receptor.nombre} no fue exitoso. El paciente se encuentra en estado inestable con alta prioridad")
+                else: 
+                    print(f"Transplante de {organo.tipo} para {receptor.nombre} se llevó a cabo. Estado actual del paciente: {receptor.estado}")
             
-            return
+                return
     print("No se pudo encontrar un donante y receptor compatibles para el transplante en este momento.")
 
 def menu ():
