@@ -1,5 +1,6 @@
 from Persona.persona import Persona
 from Organos.organo import Organo
+from datetime import datetime
 
 class Donante (Persona):
     """

@@ -271,13 +271,28 @@ def registrar_paciente():
 
 
     if tipo_persona == "Donante":
-        fecha_fallecimiento = ingresar_fecha_hora("Fecha y hora de fallecimiento (DD/MM/AAAA HH:MM): ")
-        if fecha_fallecimiento is None:
-            return
+        while True:
+            fecha_fallecimiento = ingresar_fecha_hora("Fecha y hora de fallecimiento (DD/MM/AAAA HH:MM): ")
+            if fecha_fallecimiento is None:
+                return
         
-        fecha_ablacion = ingresar_fecha_hora("Fecha y hora de ablación (DD/MM/AAAA HH:MM): ")
-        if fecha_ablacion is None:
-            return
+            fecha_ablacion = ingresar_fecha_hora("Fecha y hora de ablación (DD/MM/AAAA HH:MM): ")
+            if fecha_ablacion is None:
+                return
+        
+            if fecha_nacimiento <= fecha_nacimiento:
+                print("La fecha de fallecimiento no puede ser anterior o  igual a la fecha de nacimiento.")
+                continue
+
+            if fecha_ablacion < fecha_fallecimiento:
+                print("La fecha de ablanción no puede ser anterior a la fecha de fallecimiento")
+                continue
+
+            if fecha_ablacion <= fecha_nacimiento:
+                print("La fecha de ablación no puede ser anterior o igual a la fecha de nacimiento.")
+                continue
+
+            break
         
         organos_lista = seleccionar_multiples_opciones(organos_validos, "Seleccione los organos a donar (0 para finalizar): ")
         if organos_lista is None or len(organos_lista) == 0:
