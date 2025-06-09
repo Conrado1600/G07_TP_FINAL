@@ -74,11 +74,13 @@ class Centro_salud():
             for vehic in self.vehiculos:  #creamos una variable "vehic" para no repetir palabra vehiculo.
                 if vehic.tipo == "Avion":
                     return vehic
+            raise Exception("No hay aviones disponibles para este translado")
                  
         elif self.partido != partido_destino:
             for vehic in self.vehiculos:
                 if vehic.tipo == "Helicoptero":
                     return vehic
+            raise Exception("No hay helicopteros disponibles para este translado")
         else: 
             Vehiculos_terrestres: list[vehiculo] = []
             for vehic in self.vehiculos: 

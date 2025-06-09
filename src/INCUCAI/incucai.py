@@ -87,7 +87,14 @@ class INCUCAI:
         llegada = fecha_ablacion + timedelta(hours=tiempo_viaje)
 
         cirujano_apto = centro_receptor.asignar_cirujano(organo) #asigno cirujano
-
+        if cirujano_apto is None:
+            cirujano_apto = centro_donante.asignar_cirujano(organo)
+        if cirujano_apto is None:
+            print("No se encontro un cirujano disponible en ningun centro")
+            receptor.estado = "Inestable"
+            receptor.prioridad = 1
+            return False
+        
         if llegada - fecha_ablacion > timedelta(hours=20):
             receptor.estado = "Inestable"
             receptor.prioridad = 1
