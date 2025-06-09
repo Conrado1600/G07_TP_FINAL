@@ -1,4 +1,5 @@
 from Persona.persona import Persona
+from Organos.organo import Organo
 
 class Donante (Persona):
     """
@@ -13,10 +14,19 @@ class Donante (Persona):
         self.fecha_hora_fallecimiento = fecha_hora_fallecimiento
         self.fecha_hora_ablacion = fecha_hora_ablacion
         self.organos = organos
+        
 
+        if fecha_hora_ablacion <= fecha_nacimiento:
+            raise ValueError("La fecha de fallecimiento no puede ser anterior o igual a la de nacimiento")
+        
+        if fecha_hora_ablacion < fecha_hora_fallecimiento:
+            raise ValueError ("La fecha de ablacion no puede ser anterior a la fecha de fallecimiento")
+        
         for organo in organos:
             if organo.tipo.lower() not in self.organos_validos:
                 raise ValueError(f"Este organo no es parte de la lista de organos validos:{organo.tipo}")
+            organo.set_fecha_ablacion(fecha_hora_ablacion)
+
 
     def __str__(self):
         """
