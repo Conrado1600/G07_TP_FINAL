@@ -408,26 +408,35 @@ def mostrar_cirujanos_por_centro():
             print("Ningun cirujano asignado")
 
 def inicializar_proceso_transplante():
+    hubo_compatibilidad = False #si hay almenos uno transplante (en los ejemplos hay varios)
     for donante_obj in incucai.donantes:
-        if not donante_obj.organos: #esto hce que saltee a los donantes que ya no tienen organospara donar
+        if not donante_obj.organos: #esto hace que saltee a los donantes que ya no tienen organospara donar
             continue
         
         compatibilidades = incucai.buscar_receptor_para_donante(donante_obj)
 
         if compatibilidades:
             for donante, receptor, organo in compatibilidades:
-                print(f"Compatibilidad encontrada: - Donante: {donante.nombre}, Receptor: {receptor.nombre}, Órgano a donar/recibir: {organo.tipo}.")
+                print("\n---------------------------------")
+                print(f"Compatibilidad encontrada:")
+                print(f"- Donante: {donante.nombre}")
+                print(f"- Receptor: {receptor.nombre}")
+                print(f"- Órgano a donar/recibir: {organo.tipo}.")
                 incucai.realizar_transplante(donante, receptor, organo)
 
                 if receptor not in incucai.receptores:
-                    print(f"Trasnplante de {organo.tipo} realizado con éxito para {receptor.nombre}. El paciente fue removido de la lista de receptores.")
+                    print(f"Trasnplante de {organo.tipo} realizado con éxito para {receptor.nombre}.")
+                    print("El paciente fue removido de la lista de receptores.")
                 elif receptor.estado == "Inestable" and receptor.prioridad == 1:
-                    print(f"Transplante de {organo.tipo} para {receptor.nombre} no fue exitoso. El paciente se encuentra en estado inestable con alta prioridad")
+                    print(f"Transplante de {organo.tipo} para {receptor.nombre} no fue exitoso.")
+                    print("El paciente se encuentra en estado inestable con alta prioridad")
                 else: 
-                    print(f"Transplante de {organo.tipo} para {receptor.nombre} se llevó a cabo. Estado actual del paciente: {receptor.estado}")
-            
-                return
-    print("No se pudo encontrar un donante y receptor compatibles para el transplante en este momento.")
+                    print(f"Transplante de {organo.tipo} para {receptor.nombre} se llevó a cabo.")
+                    print("Estado actual del paciente: {receptor.estado}")
+
+                hubo_compatibilidad= True  
+    if not hubo_compatibilidad:            
+        print("\nNo se pudo encontrar un donante y receptor compatibles para el transplante en este momento.")
 
 def menu ():
     while True:
